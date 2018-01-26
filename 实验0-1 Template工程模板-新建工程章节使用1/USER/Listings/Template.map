@@ -1101,26 +1101,26 @@ Image Symbol Table
     i.transfer_data_lcd                      0x0800213c   Section        0  lcd_zk.o(i.transfer_data_lcd)
     i.uart_init                              0x080021b0   Section        0  usart.o(i.uart_init)
     .constdata                               0x08002250   Section     4032  zk.o(.constdata)
-    .conststring                             0x08003210   Section      993  menu.o(.conststring)
+    .conststring                             0x08003210   Section     1009  menu.o(.conststring)
     .data                                    0x20000000   Section       20  system_stm32f10x.o(.data)
     .data                                    0x20000014   Section        4  lcd_zk.o(.data)
-    .data                                    0x20000018   Section     1881  menu.o(.data)
-    .data                                    0x20000771   Section      132  zk.o(.data)
-    .data                                    0x200007f6   Section        4  delay.o(.data)
-    fac_us                                   0x200007f6   Data           1  delay.o(.data)
-    fac_ms                                   0x200007f8   Data           2  delay.o(.data)
-    .data                                    0x200007fc   Section        6  usart.o(.data)
-    .data                                    0x20000802   Section       20  stm32f10x_rcc.o(.data)
-    APBAHBPrescTable                         0x20000802   Data          16  stm32f10x_rcc.o(.data)
-    ADCPrescTable                            0x20000812   Data           4  stm32f10x_rcc.o(.data)
-    .bss                                     0x20000818   Section       12  zk.o(.bss)
-    .bss                                     0x20000824   Section      200  usart.o(.bss)
-    .bss                                     0x200008ec   Section       96  libspace.o(.bss)
-    HEAP                                     0x20000950   Section      512  startup_stm32f10x_hd.o(HEAP)
-    Heap_Mem                                 0x20000950   Data         512  startup_stm32f10x_hd.o(HEAP)
-    STACK                                    0x20000b50   Section     1024  startup_stm32f10x_hd.o(STACK)
-    Stack_Mem                                0x20000b50   Data        1024  startup_stm32f10x_hd.o(STACK)
-    __initial_sp                             0x20000f50   Data           0  startup_stm32f10x_hd.o(STACK)
+    .data                                    0x20000018   Section     1909  menu.o(.data)
+    .data                                    0x2000078d   Section      132  zk.o(.data)
+    .data                                    0x20000812   Section        4  delay.o(.data)
+    fac_us                                   0x20000812   Data           1  delay.o(.data)
+    fac_ms                                   0x20000814   Data           2  delay.o(.data)
+    .data                                    0x20000818   Section        6  usart.o(.data)
+    .data                                    0x2000081e   Section       20  stm32f10x_rcc.o(.data)
+    APBAHBPrescTable                         0x2000081e   Data          16  stm32f10x_rcc.o(.data)
+    ADCPrescTable                            0x2000082e   Data           4  stm32f10x_rcc.o(.data)
+    .bss                                     0x20000834   Section       12  zk.o(.bss)
+    .bss                                     0x20000840   Section      200  usart.o(.bss)
+    .bss                                     0x20000908   Section       96  libspace.o(.bss)
+    HEAP                                     0x20000968   Section      512  startup_stm32f10x_hd.o(HEAP)
+    Heap_Mem                                 0x20000968   Data         512  startup_stm32f10x_hd.o(HEAP)
+    STACK                                    0x20000b68   Section     1024  startup_stm32f10x_hd.o(STACK)
+    Stack_Mem                                0x20000b68   Data        1024  startup_stm32f10x_hd.o(STACK)
+    __initial_sp                             0x20000f68   Data           0  startup_stm32f10x_hd.o(STACK)
 
     Global Symbols
 
@@ -1384,8 +1384,8 @@ Image Symbol Table
     shuzi9_32                                0x08003120   Data          80  zk.o(.constdata)
     Point_32                                 0x08003170   Data          80  zk.o(.constdata)
     Empty_32                                 0x080031c0   Data          80  zk.o(.constdata)
-    Region$$Table$$Base                      0x080035f4   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08003614   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Base                      0x08003604   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08003624   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_stm32f10x.o(.data)
     AHBPrescTable                            0x20000004   Data          16  system_stm32f10x.o(.data)
     fontaddr                                 0x20000014   Data           4  lcd_zk.o(.data)
@@ -1401,36 +1401,36 @@ Image Symbol Table
     OK_Sign                                  0x2000002a   Data           1  menu.o(.data)
     OK_LongPress                             0x2000002c   Data           2  menu.o(.data)
     Level                                    0x2000002e   Data           1  menu.o(.data)
-    menu_main                                0x20000030   Data         224  menu.o(.data)
-    menu_P1_STANDARD                         0x20000110   Data         140  menu.o(.data)
-    menu_P2_SETPOINT                         0x2000019c   Data         252  menu.o(.data)
-    menu_P3_ACTUATOR                         0x20000298   Data         112  menu.o(.data)
-    menu_P4_MESSAGES                         0x20000308   Data         168  menu.o(.data)
-    menu_P5_ALARMS                           0x200003b0   Data         224  menu.o(.data)
-    menu_P6_MAN_ADJ                          0x20000490   Data         168  menu.o(.data)
-    menu_P7_PAR                              0x20000538   Data         336  menu.o(.data)
-    menu_P8_ANLG_OUT                         0x20000688   Data         168  menu.o(.data)
-    ConfirmOrCancel                          0x20000730   Data          56  menu.o(.data)
-    cur_item                                 0x20000768   Data           4  menu.o(.data)
-    prev_item                                0x2000076c   Data           4  menu.o(.data)
-    item_index                               0x20000770   Data           1  menu.o(.data)
-    shuzi0_16                                0x20000771   Data          12  zk.o(.data)
-    shuzi1_16                                0x2000077d   Data          12  zk.o(.data)
-    shuzi2_16                                0x20000789   Data          12  zk.o(.data)
-    shuzi3_16                                0x20000795   Data          12  zk.o(.data)
-    shuzi4_16                                0x200007a1   Data          12  zk.o(.data)
-    shuzi5_16                                0x200007ad   Data          12  zk.o(.data)
-    shuzi6_16                                0x200007b9   Data          12  zk.o(.data)
-    shuzi7_16                                0x200007c5   Data          12  zk.o(.data)
-    shuzi8_16                                0x200007d1   Data          12  zk.o(.data)
-    shuzi9_16                                0x200007dd   Data          12  zk.o(.data)
-    Point_16                                 0x200007e9   Data          12  zk.o(.data)
-    __stdout                                 0x200007fc   Data           4  usart.o(.data)
-    USART_RX_STA                             0x20000800   Data           2  usart.o(.data)
-    Empty_16                                 0x20000818   Data          12  zk.o(.bss)
-    USART_RX_BUF                             0x20000824   Data         200  usart.o(.bss)
-    __libspace_start                         0x200008ec   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x2000094c   Data           0  libspace.o(.bss)
+    menu_main                                0x20000030   Data         252  menu.o(.data)
+    menu_P1_STANDARD                         0x2000012c   Data         140  menu.o(.data)
+    menu_P2_SETPOINT                         0x200001b8   Data         252  menu.o(.data)
+    menu_P3_ACTUATOR                         0x200002b4   Data         112  menu.o(.data)
+    menu_P4_MESSAGES                         0x20000324   Data         168  menu.o(.data)
+    menu_P5_ALARMS                           0x200003cc   Data         224  menu.o(.data)
+    menu_P6_MAN_ADJ                          0x200004ac   Data         168  menu.o(.data)
+    menu_P7_PAR                              0x20000554   Data         336  menu.o(.data)
+    menu_P8_ANLG_OUT                         0x200006a4   Data         168  menu.o(.data)
+    ConfirmOrCancel                          0x2000074c   Data          56  menu.o(.data)
+    cur_item                                 0x20000784   Data           4  menu.o(.data)
+    prev_item                                0x20000788   Data           4  menu.o(.data)
+    item_index                               0x2000078c   Data           1  menu.o(.data)
+    shuzi0_16                                0x2000078d   Data          12  zk.o(.data)
+    shuzi1_16                                0x20000799   Data          12  zk.o(.data)
+    shuzi2_16                                0x200007a5   Data          12  zk.o(.data)
+    shuzi3_16                                0x200007b1   Data          12  zk.o(.data)
+    shuzi4_16                                0x200007bd   Data          12  zk.o(.data)
+    shuzi5_16                                0x200007c9   Data          12  zk.o(.data)
+    shuzi6_16                                0x200007d5   Data          12  zk.o(.data)
+    shuzi7_16                                0x200007e1   Data          12  zk.o(.data)
+    shuzi8_16                                0x200007ed   Data          12  zk.o(.data)
+    shuzi9_16                                0x200007f9   Data          12  zk.o(.data)
+    Point_16                                 0x20000805   Data          12  zk.o(.data)
+    __stdout                                 0x20000818   Data           4  usart.o(.data)
+    USART_RX_STA                             0x2000081c   Data           2  usart.o(.data)
+    Empty_16                                 0x20000834   Data          12  zk.o(.bss)
+    USART_RX_BUF                             0x20000840   Data         200  usart.o(.bss)
+    __libspace_start                         0x20000908   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x20000968   Data           0  libspace.o(.bss)
 
 
 
@@ -1440,9 +1440,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000215
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x00003e2c, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x000038a0])
+  Load Region LR_1 (Base: 0x08000000, Size: 0x00003e58, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x000038bc])
 
-    Execution Region ER_RO (Base: 0x08000000, Size: 0x00003614, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Base: 0x08000000, Size: 0x00003624, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1599,36 +1599,35 @@ Memory Map of the image
     0x0800213c   0x00000074   Code   RO          311    i.transfer_data_lcd  lcd_zk.o
     0x080021b0   0x000000a0   Code   RO          581    i.uart_init         usart.o
     0x08002250   0x00000fc0   Data   RO          496    .constdata          zk.o
-    0x08003210   0x000003e1   Data   RO          424    .conststring        menu.o
-    0x080035f1   0x00000003   PAD
-    0x080035f4   0x00000020   Data   RO         3804    Region$$Table       anon$$obj.o
+    0x08003210   0x000003f1   Data   RO          424    .conststring        menu.o
+    0x08003601   0x00000003   PAD
+    0x08003604   0x00000020   Data   RO         3804    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Base: 0x20000000, Size: 0x00000818, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x0000028c])
+    Execution Region ER_RW (Base: 0x20000000, Size: 0x00000834, Max: 0xffffffff, ABSOLUTE, COMPRESSED[0x00000298])
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000000   0x00000014   Data   RW          218    .data               system_stm32f10x.o
     0x20000014   0x00000004   Data   RW          312    .data               lcd_zk.o
-    0x20000018   0x00000759   Data   RW          425    .data               menu.o
-    0x20000771   0x00000084   Data   RW          497    .data               zk.o
-    0x200007f5   0x00000001   PAD
-    0x200007f6   0x00000004   Data   RW          526    .data               delay.o
-    0x200007fa   0x00000002   PAD
-    0x200007fc   0x00000006   Data   RW          583    .data               usart.o
-    0x20000802   0x00000014   Data   RW         2233    .data               stm32f10x_rcc.o
+    0x20000018   0x00000775   Data   RW          425    .data               menu.o
+    0x2000078d   0x00000084   Data   RW          497    .data               zk.o
+    0x20000811   0x00000001   PAD
+    0x20000812   0x00000004   Data   RW          526    .data               delay.o
+    0x20000816   0x00000002   PAD
+    0x20000818   0x00000006   Data   RW          583    .data               usart.o
+    0x2000081e   0x00000014   Data   RW         2233    .data               stm32f10x_rcc.o
 
 
-    Execution Region ER_ZI (Base: 0x20000818, Size: 0x00000738, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Base: 0x20000834, Size: 0x00000734, Max: 0xffffffff, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000818   0x0000000c   Zero   RW          495    .bss                zk.o
-    0x20000824   0x000000c8   Zero   RW          582    .bss                usart.o
-    0x200008ec   0x00000060   Zero   RW         3683    .bss                c_w.l(libspace.o)
-    0x2000094c   0x00000004   PAD
-    0x20000950   0x00000200   Zero   RW          630    HEAP                startup_stm32f10x_hd.o
-    0x20000b50   0x00000400   Zero   RW          629    STACK               startup_stm32f10x_hd.o
+    0x20000834   0x0000000c   Zero   RW          495    .bss                zk.o
+    0x20000840   0x000000c8   Zero   RW          582    .bss                usart.o
+    0x20000908   0x00000060   Zero   RW         3683    .bss                c_w.l(libspace.o)
+    0x20000968   0x00000200   Zero   RW          630    HEAP                startup_stm32f10x_hd.o
+    0x20000b68   0x00000400   Zero   RW          629    STACK               startup_stm32f10x_hd.o
 
 
 ==============================================================================
@@ -1641,8 +1640,8 @@ Image component sizes
        144         22          0          4          0       1304   delay.o
         60          8          0          0          0     205395   key.o
       1854         88          0          4          0      11762   lcd_zk.o
-       156          6          0          0          0     252306   main.o
-      1720        202        993       1881          0      10026   menu.o
+       156          6          0          0          0     252310   main.o
+      1720        202       1009       1909          0      10026   menu.o
        152         12          0          0          0       1658   misc.o
         64         26        304          0       1536        824   startup_stm32f10x_hd.o
        304          0          0          0          0       3832   stm32f10x_gpio.o
@@ -1657,7 +1656,7 @@ Image component sizes
       1144        158       4032        132         12       3655   zk.o
 
     ----------------------------------------------------------------------
-      7624        722       5364       2072       1748     521484   Object Totals
+      7624        722       5380       2100       1748     521488   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         16          0          3          5          0          0   (incl. Padding)
 
@@ -1696,8 +1695,8 @@ Image component sizes
          2          0          0          0          0         68   use_no_semi_2.o
 
     ----------------------------------------------------------------------
-       856         42          0          0        100       1168   Library Totals
-         8          0          0          0          4          0   (incl. Padding)
+       856         42          0          0         96       1168   Library Totals
+         8          0          0          0          0          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1706,7 +1705,7 @@ Image component sizes
        848         42          0          0         96       1168   c_w.l
 
     ----------------------------------------------------------------------
-       856         42          0          0        100       1168   Library Totals
+       856         42          0          0         96       1168   Library Totals
 
     ----------------------------------------------------------------------
 
@@ -1715,15 +1714,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      8480        764       5364       2072       1848     518332   Grand Totals
-      8480        764       5364        652       1848     518332   ELF Image Totals (compressed)
-      8480        764       5364        652          0          0   ROM Totals
+      8480        764       5380       2100       1844     518336   Grand Totals
+      8480        764       5380        664       1844     518336   ELF Image Totals (compressed)
+      8480        764       5380        664          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                13844 (  13.52kB)
-    Total RW  Size (RW Data + ZI Data)              3920 (   3.83kB)
-    Total ROM Size (Code + RO Data + RW Data)      14496 (  14.16kB)
+    Total RO  Size (Code + RO Data)                13860 (  13.54kB)
+    Total RW  Size (RW Data + ZI Data)              3944 (   3.85kB)
+    Total ROM Size (Code + RO Data + RW Data)      14524 (  14.18kB)
 
 ==============================================================================
 

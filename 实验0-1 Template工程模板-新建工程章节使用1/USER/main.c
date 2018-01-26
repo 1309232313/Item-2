@@ -21,9 +21,19 @@ int main(void)
 	TIM3_Int_Init(10-1,640-1);//定时器初始化,1/[64M/(640*10)]=0.0001s => 0.1ms
 	initial_lcd();//LCD初始化
 	clear_screen();//清屏
+	
+//	display_GB2312_string(0,0,"菜单:");
+//	display_GB2312_string(2,2,"|");
+//	display_GB2312_string(2,114,"|");
+//	display_GB2312_string(2,6,"--------------");
+//	display_GB2312_string(4,60,"100");
+//	display_string_5x7(8,1,"△▲▽<!@#$%^&*()_");
 	while(1)
 	{
 	
+		
+		
+		
 		LOGODisplay();
 	}
 }

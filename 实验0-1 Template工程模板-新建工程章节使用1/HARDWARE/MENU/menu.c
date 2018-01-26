@@ -48,7 +48,7 @@ u8 Level=0;
  *      mymenu* prev 上一级菜单，同上 
 */ 
 //结构体声明 
-struct MenuItem menu_main[8];//1级菜单,主菜单
+struct MenuItem menu_main[9];//1级菜单,主菜单
 //第2级菜单
 struct MenuItem menu_P1_STANDARD[5];//基本参数组
 struct MenuItem menu_P2_SETPOINT[9];//给定信号组
@@ -119,17 +119,18 @@ struct MenuItem menu_P8_ANLG_OUT[6];//模拟信号输出
 
 struct MenuItem ConfirmOrCancel[2];
 //结构体初始化//菜单定义,在这里将每一个菜单的关联设置好
-struct MenuItem menu_main[8] = // 第1级菜单,主菜单
+struct MenuItem menu_main[9] = // 第1级菜单,主菜单
 {
-//本级菜单数量	上级菜单级	当前菜单级  级菜单标题	菜单文本					参考宏定义	 		动作	下一级菜单						上一级菜单
-			{8, 		0,				1,					"",				"1.STANDARD  ",	MENU_SUBMENU, NULL, menu_P1_STANDARD, 	NULL},//基本参数组,
-			{8, 		0,				2,					"",				"2.SETPOINT  ",	MENU_SUBMENU, NULL, menu_P2_SETPOINT, 	NULL},//给定信号组,
-			{8, 		0,				3,					"",				"3.ACTUATOR  ",	MENU_SUBMENU, NULL, menu_P3_ACTUATOR,		NULL},//执行器特性组,
-			{8, 		0,				4,					"",				"4.MESSAGES  ",	MENU_SUBMENU, NULL, menu_P4_MESSAGES,		NULL},//P4._,
-			{8, 		0,				5,					"",				"5.ALARMS    ", MENU_SUBMENU, NULL, menu_P5_ALARMS,			NULL},//报警功能组
-			{8, 		0,				6,					"",				"6.MAN_ADJ   ", MENU_SUBMENU, NULL, menu_P6_MAN_ADJ,		NULL},//手动调整, 
-			{8,			0,				7, 					"",				"7.CTRL_PAR  ", MENU_SUBMENU, NULL, menu_P7_PAR,				NULL},//控制参数,
-			{8, 		0,				8,					"",				"8.ANLG_OUT  ", MENU_SUBMENU,	NULL, menu_P8_ANLG_OUT,		NULL},//模拟信号输出, 
+//本级菜单数量	上级菜单级	当前菜单级  级菜单标题	菜单文本					参考宏定义	 		动作			下一级菜单						上一级菜单
+			{9, 		0,				1,					"",				"1.STANDARD  ",	MENU_SUBMENU, NULL, 		menu_P1_STANDARD, 	NULL},//基本参数组,
+			{9, 		0,				2,					"",				"2.SETPOINT  ",	MENU_SUBMENU, NULL, 		menu_P2_SETPOINT, 	NULL},//给定信号组,
+			{9, 		0,				3,					"",				"3.ACTUATOR  ",	MENU_SUBMENU, NULL, 		menu_P3_ACTUATOR,		NULL},//执行器特性组,
+			{9, 		0,				4,					"",				"4.MESSAGES  ",	MENU_SUBMENU, NULL, 		menu_P4_MESSAGES,		NULL},//P4._,
+			{9, 		0,				5,					"",				"5.ALARMS    ", MENU_SUBMENU, NULL, 		menu_P5_ALARMS,			NULL},//报警功能组
+			{9, 		0,				6,					"",				"6.MAN_ADJ   ", MENU_SUBMENU, NULL, 		menu_P6_MAN_ADJ,		NULL},//手动调整, 
+			{9,			0,				7, 					"",				"7.CTRL_PAR  ", MENU_SUBMENU, NULL, 		menu_P7_PAR,				NULL},//控制参数,
+			{9, 		0,				8,					"",				"8.ANLG_OUT  ", MENU_SUBMENU,	NULL, 		menu_P8_ANLG_OUT,		NULL},//模拟信号输出, 
+			{9, 		0,				8,					"",				"9.EXIT      ", NULL,					NULL, 		menu_P8_ANLG_OUT,		NULL},//模拟信号输出,  
 }; 
 struct MenuItem menu_P1_STANDARD[5] = // 第2级菜单,基本参数组
 {
@@ -272,7 +273,7 @@ void DispCurrentMenu(void)//绘制当前菜单项
 	}
 }
 
-/**
+/**.
 *动作函数
 */
 void DropOut(const char *Text)
@@ -282,7 +283,7 @@ void DropOut(const char *Text)
 		prev_item = cur_item[0].prev;//设置当前菜单的上一级菜单 
 		clear_screen();//清屏
 		if(cur_item[item_index].Higher_Menu_Level==0)	display_GB2312_string(0,0,"菜单:");
-		else	display_GB2312_string(0,0,(u8 *)prev_item[cur_item[item_index].Higher_Menu_Level-1].label);
+		else	display_GB2312_string(0,1,(u8 *)prev_item[cur_item[item_index].Higher_Menu_Level-1].label);
 //							display_GB2312_string(0,0,"【");
 		display_GB2312_string(0,110,">>");
 		DispCurrentMenu();
@@ -424,7 +425,7 @@ u8 MenuOption(void)
 			{
 				SET_Sign=0;
 				clear_screen();//清屏
-				display_GB2312_string(0,0,"菜单:");
+				display_GB2312_string(0,1,"菜单:");
 //				display_GB2312_string(0,0,"【");
 				display_GB2312_string(0,110,">>");
 				DispCurrentMenu();
@@ -455,7 +456,7 @@ u8 MenuOption(void)
 									item_index = 0;//重置菜单项索引
 									clear_screen();//清屏
 									if(cur_item[item_index].Higher_Menu_Level==0)	display_GB2312_string(0,0,"菜单:");
-									else	display_GB2312_string(0,0,(u8 *)prev_item[cur_item[item_index].Higher_Menu_Level-1].label);
+									else	display_GB2312_string(0,1,(u8 *)prev_item[cur_item[item_index].Higher_Menu_Level-1].label);
 //									display_GB2312_string(0,0,"【");
 									display_GB2312_string(0,110,">>");
 									DispCurrentMenu();
@@ -491,7 +492,7 @@ u8 MenuOption(void)
 							prev_item = cur_item[0].prev;//设置当前菜单的上一级菜单 
 							clear_screen();//清屏
 							if(cur_item[item_index].Higher_Menu_Level==0)	display_GB2312_string(0,0,"菜单:");
-							else	display_GB2312_string(0,0,(u8 *)prev_item[cur_item[item_index].Higher_Menu_Level-1].label);
+							else	display_GB2312_string(0,1,(u8 *)prev_item[cur_item[item_index].Higher_Menu_Level-1].label);
 //							display_GB2312_string(0,0,"【");
 							display_GB2312_string(0,110,">>");
 							DispCurrentMenu();
@@ -522,6 +523,7 @@ void Initial(void)
 }
 void LOGODisplay(void)
 {
+		
 		display_128x64(LOGO);
 		delay_ms(1000);
 		Initial();
