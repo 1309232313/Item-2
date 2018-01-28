@@ -9,10 +9,15 @@
 //定义菜单项类型 
 #define MENU_SUBMENU	11 // 具有子菜单的菜单项 
 #define MENU_PARAM		12 // 参数项（用于执行参数设置）   
+
 #define	START					13 //	启动	
 #define	CLOSE					14 //	关闭
 
 //定义相应的动作参数
+//p1
+	#define	Form1			201	//P1.0定义定位器安装形式:1,Form1
+	#define	Form2			202	//P1.0定义定位器安装形式:2,Form2
+	#define	Form3			203	//P1.0定义定位器安装形式:3,Form3
 //P2
 	#define CURRENT		201	//P2.01信号制式:1,电流形式
 	#define	VOLTAGE		202	//P2.02信号制式:2,电压形式
@@ -27,6 +32,10 @@
 	#define	MIN_VR		601	//P6.0 MIN_VR 手动设置阀门全关位置
 	#define	MAX_VR		611	//P6.1 MAX_VR 手动设置阀门全开位置
 	#define	ACTAUTOR	621	//P6.2 ACTAUTOR 选择执行器型式
+//P8
+	#define	MIN_RGE8	801	//P8.0 MIN_RGE 阀位起始点电流值（默认为4mA)
+	#define	MAX_RGE8	811	//P8.1 MAX_RGE 100%阀位电流值（默认为20mA)
+	#define	ACTION		821	//P8.2 ACTION 阀位正反方向选择（默认4mA 对应阀位 0%）
 
 #define Yes		1 // 参数项（用于执行参数设置）  
 #define No		0 // 参数项（用于执行参数设置）  
@@ -35,25 +44,6 @@ extern u8 item_index;//当前菜单项索引
 
 
 
-
-/**
- * 时间变量
- */
-extern u16 Timer_segment;//定时器计数
-extern u16 ExitTimed;//各级页面自动退出的时间
-extern u16 Err_time;//错误检测时间
-/**
- * 按键变量
- * 按键响应变量
- */
-extern u8 SET_Sign;//SET按键立即响应标志; 0,无按键; 1,按下.
-extern u16 SET_LongPress; //SET按键长按等待,用作解锁等
-extern u8 UP_Sign;//UP按键立即响应标志; 0,无按键; 1,按下.
-extern u16 UP_LongPress;//UP按键长按等待,用作长按快速加.
-extern u8 DOWN_Sign;	//DOWN按键立即响应标志; 0,无按键; 1,按下.
-extern u16 DOWN_LongPress;//DOWN按键长按等待,用作长按数值快速减.
-extern u8 OK_Sign;//OK按键立即响应标志； 0，无按键；1，按下。
-extern u16 OK_LongPress;//OK按键长按等待.
 
 
 
@@ -86,11 +76,9 @@ struct MenuItem//结构体类型定义//定义一个菜单
 
 void DispCurrentMenu(void);//绘制当前菜单项
 void DropOut(const char * Text);//动作
+void P2_SETPOINT_SignalSetting(u8 parameter);
 
 
-void TIM3_IRQHandler(void); //TIM3中断
-void ExitMenuTiming(void);//页面自动退出计时器
-void KeyScan(void);//按键扫描程序,每2ms扫描一次按键
 u8 MenuOption(void);
 void Initial(void);
 void LOGODisplay(void);

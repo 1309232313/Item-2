@@ -28,13 +28,16 @@ int main(void)
 //	display_GB2312_string(2,6,"--------------");
 //	display_GB2312_string(4,60,"100");
 //	display_string_5x7(8,1,"¡÷¡ø¨Œ<!@#$%^&*()_");
+//	display_string_5x7(6,110,"mA");
 	while(1)
 	{
-	
-		
-		
-		
-		LOGODisplay();
+//	
+//		display_graphic_12x16(6,10,Triangle_Increase_White);
+//		display_graphic_12x16(6,30,Triangle_Increase_Black);
+//		display_graphic_12x16(6,50,Triangle_Decrease_White);
+//		display_graphic_12x16(6,70,Triangle_Decrease_Black);
+		P2_SETPOINT_SignalSetting(MIN_RGE);
+//		LOGODisplay();
 	}
 }
 void Rcc_FRE72_init(void)

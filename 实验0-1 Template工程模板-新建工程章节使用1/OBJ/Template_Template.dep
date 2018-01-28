@@ -1,5 +1,5 @@
 Dependencies for Project 'Template', Target 'Template': (DO NOT MODIFY !)
-F (.\main.c)(0x5A6ACAD2)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+F (.\main.c)(0x5A6DA818)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
 I (stm32f10x.h)(0x4D783CB4)
 I (..\CORE\core_cm3.h)(0x4D523B58)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -29,13 +29,13 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-I (..\HARDWARE\LCD\LCD_ZK.H)(0x5A60354B)
-I (..\HARDWARE\ZK\zk.h)(0x5A66F72F)
+I (..\HARDWARE\LCD\LCD_ZK.H)(0x5A6D97C1)
+I (..\HARDWARE\ZK\zk.h)(0x5A6D9555)
 I (..\SYSTEM\sys\sys.h)(0x550F951B)
 I (..\SYSTEM\delay\delay.h)(0x555AC82B)
-I (..\HARDWARE\KEY\key.h)(0x5A65970D)
-I (..\HARDWARE\MENU\menu.h)(0x5A69827F)
-I (..\HARDWARE\TIMER3\timer3.h)(0x5A152D95)
+I (..\HARDWARE\KEY\key.h)(0x5A6D9ED7)
+I (..\HARDWARE\MENU\menu.h)(0x5A6DA7AB)
+I (..\HARDWARE\TIMER3\timer3.h)(0x5A6D9994)
 I (..\SYSTEM\usart\usart.h)(0x50517A82)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
 F (.\stm32f10x_it.c)(0x4EBEACB0)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_it.o --omf_browse ..\obj\stm32f10x_it.crf --depend ..\obj\stm32f10x_it.d)
@@ -99,7 +99,7 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-F (..\HARDWARE\KEY\key.c)(0x5A657B4D)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\key.o --omf_browse ..\obj\key.crf --depend ..\obj\key.d)
+F (..\HARDWARE\KEY\key.c)(0x5A6DA8FD)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\key.o --omf_browse ..\obj\key.crf --depend ..\obj\key.d)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
 I (..\CORE\core_cm3.h)(0x4D523B58)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
@@ -128,81 +128,46 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-I (..\HARDWARE\KEY\key.h)(0x5A65970D)
+I (..\HARDWARE\KEY\key.h)(0x5A6D9ED7)
 I (..\SYSTEM\sys\sys.h)(0x550F951B)
 I (..\SYSTEM\delay\delay.h)(0x555AC82B)
-F (..\HARDWARE\LCD\LCD_ZK.c)(0x5A6068E1)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\lcd_zk.o --omf_browse ..\obj\lcd_zk.crf --depend ..\obj\lcd_zk.d)
-I (..\HARDWARE\LCD\LCD_ZK.H)(0x5A60354B)
-I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x4D783BB4)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
-I (..\USER\system_stm32f10x.h)(0x4D783CAA)
-I (..\USER\stm32f10x_conf.h)(0x5501900A)
-I (..\STM32F10x_FWLib\inc\stm32f10x_adc.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_bkp.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_can.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_cec.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_crc.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_dac.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_dma.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_exti.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_flash.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_fsmc.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_i2c.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_iwdg.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_pwr.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_rtc.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_sdio.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_spi.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
-I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-I (..\SYSTEM\delay\delay.h)(0x555AC82B)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-F (..\HARDWARE\MENU\menu.c)(0x5A6ACD5A)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\menu.o --omf_browse ..\obj\menu.crf --depend ..\obj\menu.d)
-I (..\HARDWARE\MENU\menu.h)(0x5A69827F)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
-I (..\USER\system_stm32f10x.h)(0x4D783CAA)
-I (..\USER\stm32f10x_conf.h)(0x5501900A)
-I (..\STM32F10x_FWLib\inc\stm32f10x_adc.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_bkp.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_can.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_cec.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_crc.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_dac.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_dma.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_exti.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_flash.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_fsmc.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_i2c.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_iwdg.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_pwr.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_rtc.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_sdio.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_spi.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
-I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
-I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-I (..\HARDWARE\LCD\LCD_ZK.H)(0x5A60354B)
-I (..\HARDWARE\ZK\zk.h)(0x5A66F72F)
-I (..\SYSTEM\delay\delay.h)(0x555AC82B)
-I (..\HARDWARE\KEY\key.h)(0x5A65970D)
-I (..\HARDWARE\TIMER3\timer3.h)(0x5A152D95)
+I (..\HARDWARE\TIMER3\timer3.h)(0x5A6D9994)
 I (..\SYSTEM\usart\usart.h)(0x50517A82)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
-F (..\HARDWARE\TIMER3\timer3.c)(0x5A153D69)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\timer3.o --omf_browse ..\obj\timer3.crf --depend ..\obj\timer3.d)
-I (..\HARDWARE\TIMER3\timer3.h)(0x5A152D95)
+F (..\HARDWARE\LCD\LCD_ZK.c)(0x5A6D97C3)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\lcd_zk.o --omf_browse ..\obj\lcd_zk.crf --depend ..\obj\lcd_zk.d)
+I (..\HARDWARE\LCD\LCD_ZK.H)(0x5A6D97C1)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5501900A)
+I (..\STM32F10x_FWLib\inc\stm32f10x_adc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_bkp.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_can.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_cec.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_crc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dac.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_exti.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_flash.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_fsmc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_i2c.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_iwdg.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_pwr.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rtc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
+I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+I (..\SYSTEM\delay\delay.h)(0x555AC82B)
+I (..\SYSTEM\sys\sys.h)(0x550F951B)
+F (..\HARDWARE\MENU\menu.c)(0x5A6DA846)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\menu.o --omf_browse ..\obj\menu.crf --depend ..\obj\menu.d)
+I (..\HARDWARE\MENU\menu.h)(0x5A6DA7AB)
 I (..\SYSTEM\sys\sys.h)(0x550F951B)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
 I (..\CORE\core_cm3.h)(0x4D523B58)
@@ -232,8 +197,15 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-F (..\HARDWARE\ZK\zk.c)(0x5A6ACCD7)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\zk.o --omf_browse ..\obj\zk.crf --depend ..\obj\zk.d)
-I (..\HARDWARE\ZK\zk.h)(0x5A66F72F)
+I (..\HARDWARE\LCD\LCD_ZK.H)(0x5A6D97C1)
+I (..\HARDWARE\ZK\zk.h)(0x5A6D9555)
+I (..\SYSTEM\delay\delay.h)(0x555AC82B)
+I (..\HARDWARE\KEY\key.h)(0x5A6D9ED7)
+I (..\HARDWARE\TIMER3\timer3.h)(0x5A6D9994)
+I (..\SYSTEM\usart\usart.h)(0x50517A82)
+I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5475F300)
+F (..\HARDWARE\TIMER3\timer3.c)(0x5A6D9A11)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\timer3.o --omf_browse ..\obj\timer3.crf --depend ..\obj\timer3.d)
+I (..\HARDWARE\TIMER3\timer3.h)(0x5A6D9994)
 I (..\SYSTEM\sys\sys.h)(0x550F951B)
 I (..\USER\stm32f10x.h)(0x4D783CB4)
 I (..\CORE\core_cm3.h)(0x4D523B58)
@@ -263,7 +235,39 @@ I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
 I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
 I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
-I (..\HARDWARE\LCD\lcd_zk.h)(0x5A60354B)
+I (..\HARDWARE\KEY\key.h)(0x5A6D9ED7)
+F (..\HARDWARE\ZK\zk.c)(0x5A6D96C1)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\zk.o --omf_browse ..\obj\zk.crf --depend ..\obj\zk.d)
+I (..\HARDWARE\ZK\zk.h)(0x5A6D9555)
+I (..\SYSTEM\sys\sys.h)(0x550F951B)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5475F300)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5501900A)
+I (..\STM32F10x_FWLib\inc\stm32f10x_adc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_bkp.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_can.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_cec.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_crc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dac.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dma.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_exti.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_flash.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_fsmc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_i2c.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_iwdg.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_pwr.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rtc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_sdio.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_spi.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x504F415E)
+I (..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+I (..\HARDWARE\LCD\lcd_zk.h)(0x5A6D97C1)
 F (..\SYSTEM\delay\delay.c)(0x555AC82A)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I..\USER -I..\CORE -I..\STM32F10x_FWLib\inc -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\MENU -I..\HARDWARE\TIMER3 -I..\HARDWARE\ZK-I "E:\程序\1,编写\型号2\2.副本\2.V0.2\实验0-1 Template工程模板-新建工程章节使用1\USER\RTE"-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0-I D:\Keil_v5\ARM\CMSIS\Include-I D:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="514" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\delay.o --omf_browse ..\obj\delay.crf --depend ..\obj\delay.d)
 I (..\SYSTEM\delay\delay.h)(0x555AC82B)
 I (..\SYSTEM\sys\sys.h)(0x550F951B)

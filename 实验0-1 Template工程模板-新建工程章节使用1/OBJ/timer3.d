@@ -30,3 +30,4 @@
 ..\obj\timer3.o: ..\STM32F10x_FWLib\inc\stm32f10x_usart.h
 ..\obj\timer3.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
 ..\obj\timer3.o: ..\STM32F10x_FWLib\inc\misc.h
+..\obj\timer3.o: ..\HARDWARE\KEY\key.h

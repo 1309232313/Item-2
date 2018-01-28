@@ -31,3 +31,6 @@
 ..\obj\key.o: ..\HARDWARE\KEY\key.h
 ..\obj\key.o: ..\SYSTEM\sys\sys.h
 ..\obj\key.o: ..\SYSTEM\delay\delay.h
+..\obj\key.o: ..\HARDWARE\TIMER3\timer3.h
+..\obj\key.o: ..\SYSTEM\usart\usart.h
+..\obj\key.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

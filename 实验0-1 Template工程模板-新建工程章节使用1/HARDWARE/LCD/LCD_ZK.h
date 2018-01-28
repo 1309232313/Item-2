@@ -72,6 +72,8 @@ void display_128x64(const unsigned char *dp);
 void display_graphic_16x32(unsigned int page,unsigned int column,const unsigned char *dp);
 /*显示16x16点阵图像、汉字、生僻字或16x16点阵的其他图标*/
 void display_graphic_16x16(unsigned int page,unsigned int column,const unsigned char *dp);
+/*显示△▽▼▲点阵图像*/
+void display_graphic_32x16(unsigned int page,unsigned char column,const unsigned char *dp);
 /*显示12x16点阵图像、ASCII, 或12x16点阵的自造字符、其他图标*/
 void display_graphic_12x16(unsigned int page,unsigned char column,const unsigned char *dp);
 /*显示8x16点阵图像、ASCII, 或8x16点阵的自造字符、其他图标*/

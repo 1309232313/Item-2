@@ -14,6 +14,19 @@
 //All rights reserved									  
 //////////////////////////////////////////////////////////////////////////////////   	 
 
+/**
+ * 按键变量
+ * 按键响应变量
+ */
+extern u8 SET_Sign;//SET按键立即响应标志; 0,无按键; 1,按下.
+extern u16 SET_LongPress; //SET按键长按等待,用作解锁等
+extern u8 UP_Sign;//UP按键立即响应标志; 0,无按键; 1,按下.
+extern u16 UP_LongPress;//UP按键长按等待,用作长按快速加.
+extern u8 DOWN_Sign;	//DOWN按键立即响应标志; 0,无按键; 1,按下.
+extern u16 DOWN_LongPress;//DOWN按键长按等待,用作长按数值快速减.
+extern u8 OK_Sign;//OK按键立即响应标志； 0，无按键；1，按下。
+extern u16 OK_LongPress;//OK按键长按等待.
+
 
 //#define KEY1 PBin(5)   	//PB5
 //#define KEY2 PBin(10)	//PB10
@@ -33,14 +46,16 @@
 
 
  
-
-#define UP_PRES 1	//KEY1按下
-#define DOWN_PRES	2	//KEY2按下
-#define SET_PRES	3	//KEY3按下
+#define SET_PRES	1	//KEY3按下
+#define UP_PRES 2	//KEY1按下
+#define DOWN_PRES	3	//KEY2按下
 #define OK_PRES  4//读取按键1
 
 
 
 void KEY_Init(void);//IO初始化
+void KeyScan(void);//按键扫描程序,每2ms扫描一次按键
+
+
 u8 KEY_Scan(u8);  	//按键扫描函数					    
 #endif

@@ -40,6 +40,11 @@ extern unsigned char shuzi8_16[];
 extern unsigned char shuzi9_16[];
 extern unsigned char Point_16[];
 extern unsigned char Empty_16[];
+extern unsigned char Triangle_Increase_White[];
+extern unsigned char Triangle_Increase_Black[];
+extern unsigned char Triangle_Decrease_White[];
+extern unsigned char Triangle_Decrease_Black[];
+
 void Decoding_16x32(u16 Digital);
 void Decoding_12x16(u16 Digital);
 

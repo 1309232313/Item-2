@@ -1,11 +1,19 @@
 #include "timer3.h"
-
+#include "key.h"
 
 //通用定时器3中断初始化
 //这里时钟选择为APB1的2倍，而APB1为36M
 //arr：自动重装值。
 //psc：时钟预分频数
 //这里使用的是定时器3!
+
+/**
+ * 时间变量
+ */
+u16 Timer_segment=1;//定时器计数
+u16 ExitTimed=0;//各级页面自动退出的时间
+u16 Err_time=1;//错误检测时间
+
 void TIM3_Int_Init(u16 arr,u16 psc)
 {
     TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
@@ -32,3 +40,34 @@ void TIM3_Int_Init(u16 arr,u16 psc)
 
 	TIM_Cmd(TIM3, ENABLE);  //使能TIMx					 
 }
+
+/**
+ * 按键输入扫描
+ * LCD显示
+ * 菜单定时返回
+ */
+void TIM3_IRQHandler(void)   //TIM3中断
+{
+	KeyScan();
+	ExitMenuTiming();
+	if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)//检查TIM3更新中断发生与否
+	{
+		if(Timer_segment>=1000)	Timer_segment=1;
+		else Timer_segment++;
+		TIM_ClearITPendingBit(TIM3, TIM_IT_Update);//清除TIMx更新中断标志 
+	}
+}
+void ExitMenuTiming(void)//页面自动退出计时器
+{
+	if(Timer_segment==999)
+	{
+		ExitTimed++;
+		Err_time++;
+	}
+	if(ExitTimed==600)
+	{
+		ExitTimed=0;
+		Err_time=1;
+	}
+}
+

@@ -240,7 +240,25 @@ void display_graphic_16x16(uint page,uint column,const uchar *dp)
 	}
 	lcd_cs1(1);
 }
-
+/**
+*显示△▽▼▲点阵图像
+*/
+void display_graphic_32x16(uint page,uchar column,const uchar *dp)
+{
+	uint i,j;
+	lcd_cs1(0);	
+	for(j=2;j>0;j--)
+	{
+		lcd_address(column,page);
+		for (i=0;i<12;i++)				//专门绘制	△▽▼▲
+		{	
+			transfer_data_lcd(*dp);					/*写数据到LCD,每写完一个8位的数据后列地址自动加1*/
+			dp++;
+		}
+		page++;
+	}
+	lcd_cs1(1);
+}
 /*显示8x16点阵图像、ASCII, 或12x16点阵的自造字符、其他图标*/
 //**自写
 void display_graphic_12x16(uint page,uchar column,const uchar *dp)
