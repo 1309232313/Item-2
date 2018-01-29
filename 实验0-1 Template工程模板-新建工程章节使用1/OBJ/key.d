@@ -34,3 +34,5 @@
 ..\obj\key.o: ..\HARDWARE\TIMER3\timer3.h
 ..\obj\key.o: ..\SYSTEM\usart\usart.h
 ..\obj\key.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\key.o: ..\HARDWARE\ZK\zk.h
+..\obj\key.o: ..\HARDWARE\LCD\lcd_zk.h

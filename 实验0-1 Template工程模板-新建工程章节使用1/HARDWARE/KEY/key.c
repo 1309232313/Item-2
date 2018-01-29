@@ -4,7 +4,9 @@
 #include "delay.h"
 #include "timer3.h"
 #include "usart.h"
-			
+#include "zk.h"
+#include "lcd_zk.h"
+		
 /**
  * 按键变量
  * 按键响应变量
@@ -82,11 +84,11 @@ void KeyScan(void)//按键扫描程序,每2ms扫描一次按键
 			SET_Sign=0;//关闭响应.
 			SET_LongPress=0;//长按时间归零等待下次计时.
 		}
-		if(UP==0)	//UP键位是否被按下,按键为向上加.
+		if(UP==1)	//UP键位是否被按下,按键为向上加.
 		{
 			if(Timer_segment%10==0)	//当进入手动控制压力时长按UP键时反应要迅速
 			{
-				if(UP==0)
+				if(UP==1)
 				{
 					UP_Sign=1;//按键按下立即响应标志位1.
 					ExitTimed=0;//当有按键响应时页面退出计时器归零
@@ -103,11 +105,11 @@ void KeyScan(void)//按键扫描程序,每2ms扫描一次按键
 			UP_Sign=0;//关闭响应.
 			UP_LongPress=0;//长按时间归零等待下次计时.
 		}
-		if(DOWN==1)//DOWN键位是否被按下,按键为向下减
+		if(DOWN==0)//DOWN键位是否被按下,按键为向下减
 		{
 			if(Timer_segment%10==0)//长按时快速减
 			{
-				if(DOWN==1)
+				if(DOWN==0)
 				{
 					DOWN_Sign=1;//按键按下立即响应标志为1
 					ExitTimed=0;//当有按键响应时页面退出计时器归零
@@ -151,7 +153,7 @@ void KeyScan(void)//按键扫描程序,每2ms扫描一次按键
 
 //按键处理函数
 //返回按键值
-//mode:0,不支持连续按;1,支持连续按;
+//mode:0,不支持连续按;1,支持连续按;3,显示按键符号△▽▼▲点阵图像;
 //0，没有任何按键按下
 //1，KEY1按下
 //2，KEY2按下
@@ -162,12 +164,28 @@ u8 KEY_Scan(u8 mode)
 	if(mode)key_up=1;  //支持连按		
 	if(key_up&&(SET_Sign==1||UP_Sign==1||DOWN_Sign==1||OK_Sign==1))
 	{
-		if(SET_LongPress==20||UP_LongPress==20||DOWN_LongPress==20||OK_LongPress==20)
+		if(mode==3)
+		{
+			if(UP_Sign==1)display_graphic_32x16(6,42,Triangle_Increase_Black);
+			else if(DOWN_Sign==1)display_graphic_32x16(6,75,Triangle_Decrease_Black);
+		}
+		if((45>=SET_LongPress&&SET_LongPress>=30) || (45>=UP_LongPress&&UP_LongPress>=30) || (45>=DOWN_LongPress&&DOWN_LongPress>=30) || (45>=OK_LongPress&&OK_LongPress>=30))
+		{
 			key_up=mode;
-		if(SET_LongPress>=20){SET_LongPress=0;	return SET_PRES;}
-		else if(UP_LongPress>=20){UP_LongPress=0;	return UP_PRES;}
-		else if(DOWN_LongPress>=20){DOWN_LongPress=0;	return DOWN_PRES;}
-		else if(OK_LongPress>=20){OK_LongPress=0;	return OK_PRES;}
-	}else if(SET_Sign==0 && UP_Sign==0 && DOWN_Sign==0 && OK_Sign==0)key_up=1; 	    
+		
+			if(SET_Sign==1){	SET_LongPress=0;	return SET_PRES;}
+			else if(UP_Sign==1){	UP_LongPress=0;	return UP_PRES;}
+			else if(DOWN_Sign==1){	DOWN_LongPress=0;	return DOWN_PRES;}
+			else if(OK_Sign==1){	OK_LongPress=0;	return OK_PRES;}
+		}
+	}else if(SET_Sign==0 && UP_Sign==0 && DOWN_Sign==0 && OK_Sign==0)
+	{
+		key_up=1;
+		if(mode==3)
+		{
+			display_graphic_32x16(6,42,Triangle_Increase_White);
+			display_graphic_32x16(6,75,Triangle_Decrease_White);
+		}
+	}		
  	return 0;// 无按键按下	
 }

@@ -421,16 +421,16 @@ void Decoding_16x32(u16 Digital)
 	}
 	switch(Left_3)
 	{
-		case 0:	display_graphic_16x32(2,80,shuzi0_32);break;
-		case 1:	display_graphic_16x32(2,80,shuzi1_32);break;
-		case 2:	display_graphic_16x32(2,80,shuzi2_32);break;
-		case 3:	display_graphic_16x32(2,80,shuzi3_32);break;
-		case 4:	display_graphic_16x32(2,80,shuzi4_32);break;
-		case 5:	display_graphic_16x32(2,80,shuzi5_32);break;
-		case 6:	display_graphic_16x32(2,80,shuzi6_32);break;
-		case 7:	display_graphic_16x32(2,80,shuzi7_32);break;
-		case 8:	display_graphic_16x32(2,80,shuzi8_32);break;
-		case 9:	display_graphic_16x32(2,80,shuzi9_32);break;
+		case 0:	display_graphic_16x32(2,82,shuzi0_32);break;
+		case 1:	display_graphic_16x32(2,82,shuzi1_32);break;
+		case 2:	display_graphic_16x32(2,82,shuzi2_32);break;
+		case 3:	display_graphic_16x32(2,82,shuzi3_32);break;
+		case 4:	display_graphic_16x32(2,82,shuzi4_32);break;
+		case 5:	display_graphic_16x32(2,82,shuzi5_32);break;
+		case 6:	display_graphic_16x32(2,82,shuzi6_32);break;
+		case 7:	display_graphic_16x32(2,82,shuzi7_32);break;
+		case 8:	display_graphic_16x32(2,82,shuzi8_32);break;
+		case 9:	display_graphic_16x32(2,82,shuzi9_32);break;
 	}
 display_graphic_16x32(2,66,Point_32);
 }

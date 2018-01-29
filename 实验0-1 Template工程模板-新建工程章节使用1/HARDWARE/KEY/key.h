@@ -35,9 +35,9 @@ extern u16 OK_LongPress;//OK按键长按等待.
 
 
 #define OK  GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_4)//读取按键0
-#define UP  GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_3)//读取按键1
+#define DOWN  GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_3)//读取按键1
 #define SET  GPIO_ReadInputDataBit(GPIOE,GPIO_Pin_2)//读取按键2 
-#define DOWN  GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)//读取按键3(WK_UP) 
+#define UP  GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_0)//读取按键3(WK_UP) 
 
 //#define SET		GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_4)//读取按键0
 //#define UP		GPIO_ReadInputDataBit(GPIOA,GPIO_Pin_5)//读取按键2 

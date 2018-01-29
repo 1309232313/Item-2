@@ -13,7 +13,7 @@ void mco_init(void);
 
 int main(void)
 {	
-	u16 i=0;
+//	u16 i=0;
 	rcc_hsi_init();
 	delay_init();//延时初始化
 	uart_init(9600);	 //串口初始化为115200
@@ -36,8 +36,8 @@ int main(void)
 //		display_graphic_12x16(6,30,Triangle_Increase_Black);
 //		display_graphic_12x16(6,50,Triangle_Decrease_White);
 //		display_graphic_12x16(6,70,Triangle_Decrease_Black);
-		P2_SETPOINT_SignalSetting(MIN_RGE);
-//		LOGODisplay();
+		
+		LOGODisplay();
 	}
 }
 void Rcc_FRE72_init(void)

@@ -7,13 +7,55 @@
 #include "usart.h"
 
 /**************************************************************************************************
-*参数存储变量
+*参数存储变量,全局变量
 */
+//P1
+	u8	STANDARD_P10_ACTUATOR=0;	//Form1=1,Form2=2,Form3=3
+	u8	STANDARD_P11_AUTO_ADJ=0;	//启动自动整定程序
+	u8	STANDARD_P12_TOL_BAND=0;	//设定偏差带或死区
+	u8	STANDARD_P13_TEST=0;	//试验修改结果
 //p2
+	u8	SETPOINT_P20_Signal=0;	//SETPOINT_P20_Signal=1.电流, 2.电压, 3.开关量
 	float SETPOINT_P21_MIN_RGE=4.0;//全局变量,设定给定信号的最小值(预设为4mA)
 	float SETPOINT_P22_MAX_PRG=20.0;//全局变量,设定给定信号的最大值(预设为20mA)
-
-
+	u8	SETPOINT_P23_CHARACT=0;	//选择调节特性曲线
+	u8	SETPOINT_P24_ACTION=0;	//1,正向;2,反向;设定阀门正反作用方式
+	u8	SETPOINT_P25_SHUT_OFF=0;	//设定阀门开度阈值
+	u8	SETPOINT_P26_RAMP1=0;	//降低开向速度
+	u8	SETPOINT_P27_RAMP2=0;	//降低关向速度
+//P3
+	u8	ACTUATOR_P30_MIN_RGE=0;	//调节曲线起始开度(预设为0%)
+	u8	ACTUATOR_P31_MAX_RGE=0;	//调节曲线终止开度(预设为100%)
+	u8	ACTUATOR_P32_ZERO_POS=2; //1,正向;2,逆向;起始点方向设置(预设为全关即返馈杆逆时针方向)
+//P4
+	u8	MESSAGES_P40_TIME_OUT=0; //定位超时
+	u8	MESSAGES_P41_POS_SW1=0; //第一位置信号设置点
+	u8	MESSAGES_P42_POS_SW2=0; //第二位置信号设置点
+	u8	MESSAGES_P43_SW1_ACTV=0; //高于或低于第一位置信号时有效
+	u8	MESSAGES_P44_SW2_ACTV=0; //高于或低于第二位置信号时有效
+//P5
+	u8	ALARMS_P50_LEACKAGE=0; //启动执行器气缸泄漏报警
+	u8	ALARMS_P51_SP_RGE=0; //启动给定信号超限报警
+	u8	ALARMS_P52_SENS_RGE=0; //启动零点漂移报警
+	u8	ALARMS_P53_CTRLER=0; //启动远方控制被切换报警
+	u8	ALARMS_P54_TIME_OUT=0; //启动定位超时报警
+	u8	ALARMS_P55_STRK_CTR=0; //启动调节行程超限报警
+	u8	ALARMS_P56_TRAVEL=0; //启动总行程超限报警
+//P6
+	u8	MAN_ADJ_P60_MIN_VR=0; //手动设置阀门全关位置
+	u8	MAN_ADJ_P61_MAX_VR=0; //手动设置阀门全开位置
+	u8	MAN_ADJ_P62_ACTAUTOR=0; //选择执行器型式
+	u8	MAN_ADJ_P63_SPRNG_Y2=0; //1,正向;2,反向;设定执行器弹簧伸长时定位器返馈杆旋转方向
+	u8	MAN_ADJ_P64_ADJ_MODE=0; //选择自动调整所需检测的项目
+//P7
+	u8	CTRL_PAR_P70_KP1=0; //开向比例系数调整
+	u8	CTRL_PAR_P71_KP2=0; //关向比例系数调整
+	u8	CTRL_PAR_P72_TV1=0; //开向积分时间调整
+	u8	CTRL_PAR_P73_TV2=0; //关向积分时间调整
+//P8
+	float	ANLGOUT_P80_MIN_RGE=4.0;//阀位起始点电流值（默认为4mA)
+	float	ANLGOUT_P81_MAX_RGE=20.0;//100%阀位电流值（默认为20mA)
+	u8	ANLG_OUT_P82_ACTION=0; //1,正向;2,反向;阀位正反方向选择（默认4mA 对应阀位 0%）
 u8 Level=0;
 /**
  * NULL		0
@@ -36,7 +78,7 @@ u8 Level=0;
  *      mymenu* prev 上一级菜单，同上 
 */ 
 //结构体声明 
-struct MenuItem menu_main[9];//1级菜单,主菜单
+struct MenuItem menu_main[8];//1级菜单,主菜单
 //第2级菜单
 struct MenuItem menu_P1_STANDARD[5];//基本参数组
 struct MenuItem menu_P2_SETPOINT[9];//给定信号组
@@ -118,109 +160,108 @@ u8 item_index = 0;//当前菜单项索引
 /**
 *一级菜单
 */
-struct MenuItem menu_main[9] = // 第1级菜单,主菜单
+struct MenuItem menu_main[8] = // 第1级菜单,主菜单
 {
-//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本					参考宏定义	 		动作		动作参数			下一级菜单						上一级菜单
-			{9, 		0,				0,					"菜单：        >>",		"1.STANDARD  ",	MENU_SUBMENU, NULL,		 NULL,			menu_P1_STANDARD, 	NULL},//基本参数组,
-			{9, 		0,				1,					"",										"2.SETPOINT  ",	MENU_SUBMENU, NULL,		 NULL,			menu_P2_SETPOINT, 	NULL},//给定信号组,
-			{9, 		0,				2,					"",										"3.ACTUATOR  ",	MENU_SUBMENU, NULL,		 NULL,			menu_P3_ACTUATOR,		NULL},//执行器特性组,
-			{9, 		0,				3,					"",										"4.MESSAGES  ",	MENU_SUBMENU, NULL,		 NULL,			menu_P4_MESSAGES,		NULL},//P4._,
-			{9, 		0,				4,					"",										"5.ALARMS    ", MENU_SUBMENU, NULL,		 NULL,			menu_P5_ALARMS,			NULL},//报警功能组
-			{9, 		0,				5,					"",										"6.MAN_ADJ   ", MENU_SUBMENU, NULL,		 NULL,			menu_P6_MAN_ADJ,		NULL},//手动调整, 
-			{9,			0,				6, 					"",										"7.CTRL_PAR  ", MENU_SUBMENU, NULL,		 NULL,			menu_P7_PAR,				NULL},//控制参数,
-			{9, 		0,				7,					"",										"8.ANLG_OUT  ", MENU_SUBMENU,	NULL,		 NULL,			menu_P8_ANLG_OUT,		NULL},//模拟信号输出, 
-			{9, 		0,				8,					"",										"9.EXIT      ", NULL,					NULL,		 NULL,			menu_P8_ANLG_OUT,		NULL},//模拟信号输出,  
+//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本					参考宏定义	 		动作					动作参数			下一级菜单						上一级菜单
+			{8, 		0,				0,					"菜单：        >>",		"1.STANDARD  ",	MENU_SUBMENU, NULL,		 			NULL,			menu_P1_STANDARD, 	NULL},//基本参数组,
+			{8, 		0,				1,					"",										"2.SETPOINT  ",	MENU_SUBMENU, NULL,		 			NULL,			menu_P2_SETPOINT, 	NULL},//给定信号组,
+			{8, 		0,				2,					"",										"3.ACTUATOR  ",	MENU_SUBMENU, NULL,		 			NULL,			menu_P3_ACTUATOR,		NULL},//执行器特性组,
+			{8, 		0,				3,					"",										"4.MESSAGES  ",	MENU_SUBMENU, NULL,		 			NULL,			menu_P4_MESSAGES,		NULL},//P4._,
+			{8, 		0,				4,					"",										"5.ALARMS    ", MENU_SUBMENU, NULL,		 			NULL,			menu_P5_ALARMS,			NULL},//报警功能组
+			{8, 		0,				5,					"",										"6.MAN_ADJ   ", MENU_SUBMENU, NULL,		 			NULL,			menu_P6_MAN_ADJ,		NULL},//手动调整, 
+			{8,			0,				6, 					"",										"7.CTRL_PAR  ", MENU_SUBMENU, NULL,					NULL,			menu_P7_PAR,				NULL},//控制参数,
+			{8, 		0,				7,					"",										"8.ANLG_OUT  ", MENU_SUBMENU,	NULL,		 			NULL,			menu_P8_ANLG_OUT,		NULL},//模拟信号输出, 
 }; 
 /****
 ***	2级菜单
 ***/
 struct MenuItem menu_P1_STANDARD[5] = // 第2级菜单,P1	基本参数组
 {
-//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本					参考宏定义	 		动作		动作参数			下一级菜单							上一级菜单
-			{5,			0,			 	0,					"1.STANDARD    >>",		"1.ACTUATOR  ",	MENU_SUBMENU, NULL, 		NULL,			menu_P1_0ACTUATOR, 		menu_main},//不确定 子 级菜单是什么
-			{5,			0, 				1,					"",										"2.AUTO_ADJ  ",	MENU_SUBMENU, NULL, 		NULL,			ConfirmOrCancel, 			menu_main},
-			{5,			0,	 			2,					"",										"3.TOL_BAND  ",	MENU_SUBMENU, NULL, 		NULL,			NULL, 								menu_main},//不确定 子 级菜单是什么
-			{5,			0,				3,					"",										"4.TEST      ",	MENU_SUBMENU, NULL, 		NULL,			NULL, 								menu_main},//不确定 子 级菜单是什么
-			{5,			0, 				4,					"",										"5.EXIT      ",	MENU_PARAM,		DropOut,	NULL,			NULL, 								menu_main},
+//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本					参考宏定义	 		动作			动作参数			下一级菜单							上一级菜单
+			{5,			0,			 	0,					"1.STANDARD    >>",		"1.ACTUATOR  ",	MENU_SUBMENU, NULL, 			NULL,			menu_P1_0ACTUATOR, 		menu_main},//不确定 子 级菜单是什么
+			{5,			0, 				1,					"",										"2.AUTO_ADJ  ",	MENU_PARAM, 	CancelOROK,	NULL,			NULL, 								menu_main},
+			{5,			0,	 			2,					"",										"3.TOL_BAND  ",	MENU_PARAM, 	CancelOROK, NULL,			NULL, 								menu_main},//不确定 子 级菜单是什么
+			{5,			0,				3,					"",										"4.TEST      ",	MENU_PARAM, 	CancelOROK,	NULL,			NULL, 								menu_main},//不确定 子 级菜单是什么
+			{5,			0, 				4,					"",										"5.EXIT      ",	MENU_PARAM,		UpOneLevel,	NULL,			NULL, 								menu_main},
 };
 struct MenuItem menu_P2_SETPOINT[9] = // 第2级菜单,P2	给定信号组
 {
-//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作		动作参数			下一级菜单								上一级菜单
-			{9,			1, 				0,					"2.SETPOINT    >>",		"1.SignalSyste",	MENU_SUBMENU, NULL, 		NULL, 		menu_P2_0SignalSystem,	menu_main},//不确定 子 级菜单是什么
-			{9,			1, 				1,					"",										"2.MIN_RGE    ",	MENU_PARAM, P2_SETPOINT_SignalSetting, 		NULL, 		NULL, 									menu_main},//不确定 子 级菜单是什么
-			{9,			1, 				2,					"",										"3.MAX_PRG    ",	MENU_PARAM, P2_SETPOINT_SignalSetting, 		NULL, 		NULL, 									menu_main},//不确定 子 级菜单是什么
-			{9,			1, 				3,					"",										"4.CHARACT    ",	MENU_SUBMENU, NULL, 		NULL, 		NULL, 									menu_main},//不确定 子 级菜单是什么
-			{9,			1, 				4,					"",										"5.ACTION     ",	MENU_SUBMENU, NULL, 		NULL, 		menu_P2_4ACTION, 				menu_main},//不确定 子 级菜单是什么
-			{9,			1, 				5,					"",										"6.SHUT-OFF   ",	MENU_SUBMENU, NULL, 		NULL, 		NULL, 									menu_main},//不确定 子 级菜单是什么
-			{9,			1, 				6,					"",										"7.RAMP∧     ",	MENU_SUBMENU, NULL, 		NULL, 		NULL, 									menu_main},//不确定 子 级菜单是什么
-			{9,			1, 				7,					"",										"8.RAMP∨     ",	MENU_SUBMENU, NULL, 		NULL, 		NULL, 									menu_main},//不确定 子 级菜单是什么
-			{9,			1, 				8,					"",										"9.EXIT       ",	MENU_PARAM, 	DropOut,	NULL, 		NULL, 									menu_main},
+//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作												动作参数			下一级菜单								上一级菜单
+			{9,			1, 				0,					"2.SETPOINT    >>",		"1.SignalSyste",	MENU_SUBMENU, NULL, 											NULL, 			menu_P2_0SignalSystem,	menu_main},//不确定 子 级菜单是什么
+			{9,			1, 				1,					"",										"2.MIN_RGE    ",	MENU_PARAM, 	CurrentValue, 							MIN_RGE2, 		NULL, 									menu_main},//不确定 子 级菜单是什么
+			{9,			1, 				2,					"",										"3.MAX_PRG    ",	MENU_PARAM, 	CurrentValue, 							MAX_PRG2, 		NULL, 									menu_main},//不确定 子 级菜单是什么
+			{9,			1, 				3,					"",										"4.CHARACT    ",	MENU_SUBMENU, NULL, 											NULL, 			NULL, 									menu_main},//不确定 子 级菜单是什么
+			{9,			1, 				4,					"",										"5.ACTION     ",	MENU_SUBMENU, NULL, 											NULL, 			menu_P2_4ACTION, 				menu_main},//不确定 子 级菜单是什么
+			{9,			1, 				5,					"",										"6.SHUT-OFF   ",	MENU_SUBMENU, NULL, 											NULL, 			NULL, 									menu_main},//不确定 子 级菜单是什么
+			{9,			1, 				6,					"",										"7.RAMP∧     ",	MENU_SUBMENU, NULL, 											NULL, 			NULL, 									menu_main},//不确定 子 级菜单是什么
+			{9,			1, 				7,					"",										"8.RAMP∨     ",	MENU_SUBMENU, NULL, 											NULL, 			NULL, 									menu_main},//不确定 子 级菜单是什么
+			{9,			1, 				8,					"",										"9.EXIT       ",	MENU_PARAM, 	UpOneLevel, 								NULL, 			NULL, 									menu_main},
 };
 struct MenuItem menu_P3_ACTUATOR[4] = // 第2级菜单,P3	执行器特性组
 {
-//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作		动作参数			下一级菜单						上一级菜单
-			{4,				2, 			0,					"3.ACTUATOR    >>",		"1.MIN_RGE    ",	MENU_SUBMENU, NULL, 		NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么
-			{4,				2,			1,					"",										"2.MAX_RGE    ",	MENU_SUBMENU, NULL, 		NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么
-			{4,				2, 			2,					"",										"3.ZERO_POS   ",	MENU_SUBMENU, NULL,		 	NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么
-			{4,				2, 			3,					"",										"4.EXIT       ",	MENU_PARAM, 	DropOut, 	NULL,			NULL, 						menu_main},//不确定 子 级菜单是什么	
+//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作			动作参数			下一级菜单						上一级菜单
+			{4,				2, 			0,					"3.ACTUATOR    >>",		"1.MIN_RGE    ",	MENU_SUBMENU, NULL, 			NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么
+			{4,				2,			1,					"",										"2.MAX_RGE    ",	MENU_SUBMENU, NULL, 			NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么
+			{4,				2, 			2,					"",										"3.ZERO_POS   ",	MENU_SUBMENU, NULL,		 		NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么
+			{4,				2, 			3,					"",										"4.EXIT       ",	MENU_PARAM, 	UpOneLevel,	NULL,			NULL, 						menu_main},//不确定 子 级菜单是什么	
 };
 struct MenuItem menu_P4_MESSAGES[6] = // 第2级菜单,P4	MESSAGES
 {
-//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作		动作参数			下一级菜单						上一级菜单
-			{6,				3, 			0,					"4.MESSAGES    >>",		"1.TIME_OUT   ",	MENU_SUBMENU, NULL, 		NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么
-			{6,				3, 			1,					"",										"2.POS_SW1    ",	MENU_SUBMENU, NULL, 		NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么			
-			{6,				3, 			2,					"",										"3.POS_SW2    ",	MENU_SUBMENU, NULL, 		NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么			
-			{6,				3, 			3,					"",										"4.SW1_ACTV   ",	MENU_SUBMENU, NULL, 		NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么			
-			{6,				3, 			4,					"",										"5.SW2_ACTV   ",	MENU_SUBMENU, NULL,		 	NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么			
-			{6,				3, 			5,					"",										"6.EXIT       ",	MENU_PARAM, 	DropOut,	NULL, 		NULL, 						menu_main},//不确定 子 级菜单是什么			
+//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作			动作参数			下一级菜单						上一级菜单
+			{6,				3, 			0,					"4.MESSAGES    >>",		"1.TIME_OUT   ",	MENU_SUBMENU, NULL, 			NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么
+			{6,				3, 			1,					"",										"2.POS_SW1    ",	MENU_SUBMENU, NULL, 			NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么			
+			{6,				3, 			2,					"",										"3.POS_SW2    ",	MENU_SUBMENU, NULL, 			NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么			
+			{6,				3, 			3,					"",										"4.SW1_ACTV   ",	MENU_SUBMENU, NULL, 			NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么			
+			{6,				3, 			4,					"",										"5.SW2_ACTV   ",	MENU_SUBMENU, NULL,		 		NULL,  		NULL, 						menu_main},//不确定 子 级菜单是什么			
+			{6,				3, 			5,					"",										"6.EXIT       ",	MENU_PARAM, 	UpOneLevel,	NULL, 		NULL, 						menu_main},//不确定 子 级菜单是什么			
 };
 struct MenuItem menu_P5_ALARMS[8] = // 第2级菜单,P5	报警功能组
 {
-//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作		动作参数			下一级菜单						上一级菜单
-			{8,				4, 			0,					"5.ALARMS      >>",		"1.LEACKAGE   ",	MENU_SUBMENU, NULL, 		NULL,  		ConfirmOrCancel,	menu_main},//不确定 子 级菜单是什么
-			{8,				4, 			1,					"",										"2.SP_RGE     ",	MENU_SUBMENU, NULL, 		NULL,  		ConfirmOrCancel,	menu_main},//不确定 子 级菜单是什么
-			{8,				4, 			2,					"",										"3.SENS_RGE   ",	MENU_SUBMENU, NULL, 		NULL,  		ConfirmOrCancel,	menu_main},//不确定 子 级菜单是什么
-			{8,				4, 			3,					"",										"4.CTRLER     ",	MENU_SUBMENU, NULL, 		NULL,  		ConfirmOrCancel,	menu_main},//不确定 子 级菜单是什么
-			{8,				4, 			4,					"",										"5.TIME_OUT   ",	MENU_SUBMENU, NULL, 		NULL,  		ConfirmOrCancel,	menu_main},//不确定 子 级菜单是什么
-			{8,				4, 			5,					"",										"6.STRK_CTR   ",	MENU_SUBMENU, NULL, 		NULL,  		ConfirmOrCancel,	menu_main},//不确定 子 级菜单是什么
-			{8,				4, 			6,					"",										"7.TRAVEL     ",	MENU_SUBMENU, NULL, 		NULL,  		ConfirmOrCancel,	menu_main},//不确定 子 级菜单是什么
-			{8,				4, 			7,					"",										"8.EXIT       ",	MENU_PARAM, 	DropOut, 	NULL,			NULL, 						menu_main},//不确定 子 级菜单是什么
+//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作					动作参数		下一级菜单		上一级菜单
+			{8,				4, 			0,					"5.ALARMS      >>",		"1.LEACKAGE   ",	MENU_PARAM, 	CancelOROK, 	NULL,  		NULL,					menu_main},//不确定 子 级菜单是什么
+			{8,				4, 			1,					"",										"2.SP_RGE     ",	MENU_PARAM, 	CancelOROK, 	NULL,  		NULL,					menu_main},//不确定 子 级菜单是什么
+			{8,				4, 			2,					"",										"3.SENS_RGE   ",	MENU_PARAM, 	CancelOROK, 	NULL,  		NULL,					menu_main},//不确定 子 级菜单是什么
+			{8,				4, 			3,					"",										"4.CTRLER     ",	MENU_PARAM, 	CancelOROK, 	NULL,  		NULL,					menu_main},//不确定 子 级菜单是什么
+			{8,				4, 			4,					"",										"5.TIME_OUT   ",	MENU_PARAM, 	CancelOROK, 	NULL,  		NULL,					menu_main},//不确定 子 级菜单是什么
+			{8,				4, 			5,					"",										"6.STRK_CTR   ",	MENU_PARAM, 	CancelOROK, 	NULL,  		NULL,					menu_main},//不确定 子 级菜单是什么
+			{8,				4, 			6,					"",										"7.TRAVEL     ",	MENU_PARAM, 	CancelOROK, 	NULL,  		NULL,					menu_main},//不确定 子 级菜单是什么
+			{8,				4, 			7,					"",										"8.EXIT       ",	MENU_PARAM, 	UpOneLevel,		NULL,			NULL, 				menu_main},//不确定 子 级菜单是什么
 };
 struct MenuItem menu_P6_MAN_ADJ[6] = // 第2级菜单,P6	手动调整
 {
-//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作		动作参数			下一级菜单						上一级菜单
-			{6,				5, 			0,					"6.MAN_ADJ     >>",		"1.MIN_VR     ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,								menu_main},//不确定 子 级菜单是什么
-			{6,				5, 			1,					"",										"2.MAX_VR     ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,								menu_main},//不确定 子 级菜单是什么
-			{6,				5, 			2,					"",										"3.ACTAUTOR   ",	MENU_SUBMENU, NULL, 		NULL,  		menu_P6_2ACTAUTOR,	menu_main},//不确定 子 级菜单是什么
-			{6,				5, 			3,					"",										"4.SPRNG_Y2   ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,								menu_main},//不确定 子 级菜单是什么
-			{6,				5, 			4,					"",										"5.ADJ_MODE   ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,								menu_main},//不确定 子 级菜单是什么
-			{6,				5, 			5,					"",										"6.EXIT       ",	MENU_PARAM, 	DropOut, 	NULL,			NULL,								menu_main},//不确定 子 级菜单是什么
+//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作			动作参数			下一级菜单						上一级菜单
+			{6,				5, 			0,					"6.MAN_ADJ     >>",		"1.MIN_VR     ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,								menu_main},//不确定 子 级菜单是什么
+			{6,				5, 			1,					"",										"2.MAX_VR     ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,								menu_main},//不确定 子 级菜单是什么
+			{6,				5, 			2,					"",										"3.ACTAUTOR   ",	MENU_SUBMENU, NULL, 			NULL,  		menu_P6_2ACTAUTOR,	menu_main},//不确定 子 级菜单是什么
+			{6,				5, 			3,					"",										"4.SPRNG_Y2   ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,								menu_main},//不确定 子 级菜单是什么
+			{6,				5, 			4,					"",										"5.ADJ_MODE   ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,								menu_main},//不确定 子 级菜单是什么
+			{6,				5, 			5,					"",										"6.EXIT       ",	MENU_PARAM, 	UpOneLevel,	NULL,			NULL,								menu_main},//不确定 子 级菜单是什么
 };
 struct MenuItem menu_P7_PAR[12] = // 第2级菜单,P7	控制参数
 {
-//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作		动作参数			下一级菜单						上一级菜单
-			{12,			6, 			0,					"7.PAR         >>",		"1.KP1        ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{12,			6, 			1,					"",										"2.KP2        ",	MENU_SUBMENU, NULL,			NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{12,			6, 			2,					"",										"3.TV1        ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{12,			6, 			3,					"",										"4.TV2        ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{12,			6, 			4,					"",										"5.Air        ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{12,			6, 			5,					"",										"6.Air        ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{12,			6,			6,					"",										"7.Air        ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{12,			6, 			7,					"",										"8.Air        ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{12,			6, 			8,					"",										"9.Air        ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{12,			6, 			9,					"",										"10.Air       ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{12,			6, 			10,					"",										"11.Air       ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{12,			6, 			11,					"",										"12.EXIT      ",	MENU_PARAM, 	DropOut, 	NULL,			NULL,							menu_main},//不确定 子 级菜单是什么
+//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作			动作参数			下一级菜单						上一级菜单
+			{12,			6, 			0,					"7.PAR         >>",		"1.KP1        ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{12,			6, 			1,					"",										"2.KP2        ",	MENU_SUBMENU, NULL,				NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{12,			6, 			2,					"",										"3.TV1        ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{12,			6, 			3,					"",										"4.TV2        ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{12,			6, 			4,					"",										"5.Air        ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{12,			6, 			5,					"",										"6.Air        ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{12,			6,			6,					"",										"7.Air        ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{12,			6, 			7,					"",										"8.Air        ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{12,			6, 			8,					"",										"9.Air        ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{12,			6, 			9,					"",										"10.Air       ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{12,			6, 			10,					"",										"11.Air       ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{12,			6, 			11,					"",										"12.EXIT      ",	MENU_PARAM, 	UpOneLevel, NULL,			NULL,							menu_main},//不确定 子 级菜单是什么
 };
 struct MenuItem menu_P8_ANLG_OUT[6] = // 第2级菜单,P8	模拟信号输出
 {
-//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作		动作参数			下一级菜单						上一级菜单
-			{6,			7,			 	0,					"8.ANLG_OUT    >>",		"1.MIN_RGE    ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{6,			7, 				1,					"",										"2.MAX_RGE    ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{6,			7, 				2,					"",										"3.ACTION     ",	MENU_SUBMENU, NULL, 		NULL,  		menu_P8_2ACTION,	menu_main},//不确定 子 级菜单是什么
-			{6,			7, 				3,					"",										"4.ALARM      ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{6,			7, 				4,					"",										"5.TEST       ",	MENU_SUBMENU, NULL, 		NULL,  		NULL,							menu_main},//不确定 子 级菜单是什么
-			{6,			7, 				5,					"",										"6.EXIT       ",	MENU_PARAM, 	DropOut, 	NULL,			NULL,							menu_main},//不确定 子 级菜单是什么
+//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作							动作参数			下一级菜单						上一级菜单
+			{6,			7,			 	0,					"8.ANLG_OUT    >>",		"1.MIN_RGE    ",	MENU_PARAM,	 	CurrentValue, 		MIN_RGE8,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{6,			7, 				1,					"",										"2.MAX_RGE    ",	MENU_PARAM,		CurrentValue, 		MAX_RGE8,  		NULL,							menu_main},//不确定 子 级菜单是什么
+			{6,			7, 				2,					"",										"3.ACTION     ",	MENU_SUBMENU, NULL, 						NULL,  				menu_P8_2ACTION,	menu_main},//不确定 子 级菜单是什么
+			{6,			7, 				3,					"",										"4.ALARM      ",	MENU_SUBMENU, NULL, 						NULL,  				NULL,							menu_main},//不确定 子 级菜单是什么
+			{6,			7, 				4,					"",										"5.TEST       ",	MENU_SUBMENU, NULL, 						NULL,  				NULL,							menu_main},//不确定 子 级菜单是什么
+			{6,			7, 				5,					"",										"6.EXIT       ",	MENU_PARAM, 	UpOneLevel, 			NULL,					NULL,							menu_main},//不确定 子 级菜单是什么
 };
 /********
 *****	3级菜单
@@ -228,47 +269,47 @@ struct MenuItem menu_P8_ANLG_OUT[6] = // 第2级菜单,P8	模拟信号输出
 ////p1
 	struct MenuItem menu_P1_0ACTUATOR[3] = // 第	3 级菜单,P1_0	定义定位器安装形式
 	{
-	//本级菜单数量	上级菜单级	当前菜单级  级菜单标题						菜单文本						参考宏定义	 		动作		动作参数			下一级菜单						上一级菜单
-				{3,				0, 			0,					"1_1.ACTUATOR  >>",	"1.Form 1     ",	MENU_SUBMENU, NULL, 	Form1, 	 		NULL,								menu_P1_STANDARD},//型式1
-				{3,				0, 			1,					"",									"2.Form 2     ",	MENU_SUBMENU, NULL, 	Form2,  		NULL,								menu_P1_STANDARD},//型式2
-				{3,				0, 			2,					"",									"3.Form 3     ",	MENU_SUBMENU, NULL, 	Form3,  		NULL,								menu_P1_STANDARD},//型式3
+	//本级菜单数量	上级菜单级	当前菜单级  级菜单标题						菜单文本						参考宏定义	 		动作					动作参数			下一级菜单						上一级菜单
+				{3,				0, 			0,					"1_1.ACTUATOR  >>",	"1.Form 1     ",	MENU_PARAM, 	CancelOROK, 	Form1, 	 		NULL,								menu_P1_STANDARD},//型式1
+				{3,				0, 			1,					"",									"2.Form 2     ",	MENU_PARAM, 	CancelOROK, 	Form2,  		NULL,								menu_P1_STANDARD},//型式2
+				{3,				0, 			2,					"",									"3.Form 3     ",	MENU_PARAM, 	CancelOROK, 	Form3,  		NULL,								menu_P1_STANDARD},//型式3
 	};
 
 ////p2
 	struct MenuItem menu_P2_0SignalSystem[3] = // 第	3 级菜单,P2_0	信号制式
-	{
-	//本级菜单数量	上级菜单级	当前菜单级  级菜单标题						菜单文本						参考宏定义	 		动作		动作参数			下一级菜单						上一级菜单
-				{3,				0, 			0,					"2_1.Signal    >>",	"1.Current    ",	MENU_SUBMENU, NULL, 	CURRENT, 	 	NULL,								menu_P2_SETPOINT},//电流
-				{3,				0, 			1,					"",									"2.Voltage    ",	MENU_SUBMENU, NULL, 	VOLTAGE,  	NULL,								menu_P2_SETPOINT},//电压
-				{3,				0, 			2,					"",									"3.Switch     ",	MENU_SUBMENU, NULL, 	SWITCH,  		NULL,								menu_P2_SETPOINT},//开关量
+	{		
+	//本级菜单数量	上级菜单级	当前菜单级  级菜单标题						菜单文本						参考宏定义	 		动作					动作参数			下一级菜单						上一级菜单
+				{3,				0, 			0,					"2_1.Signal    >>",	"1.Current    ",	MENU_PARAM, 	CancelOROK, 	CURRENT, 	 	NULL,								menu_P2_SETPOINT},//电流
+				{3,				0, 			1,					"",									"2.Voltage    ",	MENU_PARAM, 	CancelOROK, 	VOLTAGE,  	NULL,								menu_P2_SETPOINT},//电压
+				{3,				0, 			2,					"",									"3.Switch     ",	MENU_PARAM, 	CancelOROK, 	SWITCH,  		NULL,								menu_P2_SETPOINT},//开关量
 	};
 	struct MenuItem menu_P2_4ACTION[2] = // 第	3 级菜单,P2_4	设定阀门正反作用方式
 	{	
-	//本级菜单数量	上级菜单级	当前菜单级  级菜单标题						菜单文本						参考宏定义	 		动作		动作参数			下一级菜单						上一级菜单
-				{2,				4, 			0,					"2_4.ACTION   >>",	"1.Positive   ",	MENU_SUBMENU, NULL, 	NULL, 		 	NULL,								menu_P2_SETPOINT},//正向
-				{2,				4, 			1,					"",									"2.Reverse    ",	MENU_SUBMENU, NULL, 	NULL, 		 	NULL,								menu_P2_SETPOINT},//反向
+	//本级菜单数量	上级菜单级	当前菜单级  级菜单标题						菜单文本						参考宏定义	 		动作					动作参数			下一级菜单						上一级菜单
+				{2,				4, 			0,					"2_4.ACTION   >>",	"1.Positive   ",	MENU_PARAM, 	CancelOROK, 	POSITIVE,  	NULL,								menu_P2_SETPOINT},//正向
+				{2,				4, 			1,					"",									"2.Reverse    ",	MENU_PARAM, 	CancelOROK, 	REVERSE,  	NULL,								menu_P2_SETPOINT},//反向
 	};	
 ////p6
 	struct MenuItem menu_P6_2ACTAUTOR[2] = // 第	3 级菜单,P6_2	选择执行器型式
 	{
-	//本级菜单数量	上级菜单级	当前菜单级  级菜单标题						菜单文本						参考宏定义	 		动作		动作参数			下一级菜单						上一级菜单
-				{2,				4, 			0,					"6_2.ACTAUTOR >>",	"1.Form 1      ",	MENU_SUBMENU, NULL, 	NULL, 		 	NULL,								menu_P6_MAN_ADJ},//型式1	
-				{2,				4, 			0,					"",									"2.Form 1      ",	MENU_SUBMENU, NULL, 	NULL, 		 	NULL,								menu_P6_MAN_ADJ},//型式2
+	//本级菜单数量	上级菜单级	当前菜单级  级菜单标题						菜单文本						参考宏定义	 		动作					动作参数			下一级菜单						上一级菜单
+				{2,				4, 			0,					"6_2.ACTAUTOR >>",	"1.Form 1      ",	MENU_PARAM, 	CancelOROK, 	ACTAUTOR1, 	NULL,								menu_P6_MAN_ADJ},//型式1	
+				{2,				4, 			0,					"",									"2.Form 2      ",	MENU_PARAM, 	CancelOROK, 	ACTAUTOR2,	NULL,								menu_P6_MAN_ADJ},//型式2
 	};
 ////p8
 	struct MenuItem menu_P8_2ACTION[2] = // 第	3 级菜单,P6_2	选择执行器型式	
 	{
-	//本级菜单数量	上级菜单级	当前菜单级  级菜单标题						菜单文本						参考宏定义	 		动作		动作参数			下一级菜单						上一级菜单
-				{2,				4, 			0,					"8_2.ACTION   >>",	"1.Positive    ",	MENU_SUBMENU, NULL, 	NULL, 		 	NULL,								menu_P8_ANLG_OUT},//正向	
-				{2,				4, 			0,					"",									"2.Reverse     ",	MENU_SUBMENU, NULL, 	NULL, 		 	NULL,								menu_P8_ANLG_OUT},//反向
+	//本级菜单数量	上级菜单级	当前菜单级  级菜单标题						菜单文本						参考宏定义	 		动作					动作参数			下一级菜单						上一级菜单
+				{2,				4, 			0,					"8_2.ACTION   >>",	"1.Positive    ",	MENU_PARAM, 	CancelOROK, 	ACTION1,			NULL,								menu_P8_ANLG_OUT},//正向	
+				{2,				4, 			0,					"",									"2.Reverse     ",	MENU_PARAM, 	CancelOROK, 	ACTION2,			NULL,								menu_P8_ANLG_OUT},//反向
 	};
 	
 	
 struct MenuItem ConfirmOrCancel[2] = // 第3级菜单,确认或取消
 {
 //本级菜单数量	上级菜单级	当前菜单级  级菜单标题						菜单文本						参考宏定义	 		动作			动作参数			下一级菜单						上一级菜单
-			{2,				2, 			0,					"",									"Cancel      ",		NULL,					DropOut, 	NULL,				NULL, 						menu_main},//取消
-			{2,				2, 			1,					"",									"Confirm     ",		MENU_PARAM, 	DropOut, 	NULL,				NULL, 						menu_main},//确认
+			{2,				2, 			0,					"",									"Cancel      ",		NULL,					UpOneLevel, 	NULL,				NULL, 						menu_main},//取消
+			{2,				2, 			1,					"",									"Confirm     ",		MENU_PARAM, 	UpOneLevel, 	NULL,				NULL, 						menu_main},//确认
 };	
 
 
@@ -282,49 +323,242 @@ struct MenuItem ConfirmOrCancel[2] = // 第3级菜单,确认或取消
 /******************************************************************************************************************************************************************************************************
 *动作函数
 */
-void DropOut(const char *Text)
+/**
+*返回上一级菜单
+*@Text	上级菜单文本
+*@parameter	动作参数
+*/
+void	UpOneLevel(const char *Text, u16 parameter)
 {
-		item_index=cur_item[item_index].Higher_Menu_Level-1;//重置菜单项索引
-		cur_item = prev_item;//设置上一级菜单为当前菜单 
-		prev_item = cur_item[0].prev;//设置当前菜单的上一级菜单 
-		DispCurrentMenu();
+	item_index=cur_item[item_index].Higher_Menu_Level;//重置菜单项索引
+	cur_item = prev_item;//设置上一级菜单为当前菜单 
+	prev_item = cur_item[0].prev;//设置当前菜单的上一级菜单 
+	DispCurrentMenu();
+}
+
+/**
+*更新全局参数
+*@parameter	各级控制页面的动作参数,
+*@value	取消或确认
+*/
+void	ParameterAssignment(u16 parameter,u16 value)
+{
+	switch(parameter)
+	{
+//P1
+		case	Form1:	STANDARD_P10_ACTUATOR=1;	break;
+		case	Form2:	STANDARD_P10_ACTUATOR=2;	break;
+		case	Form3:	STANDARD_P10_ACTUATOR=3;	break;
+		case	AUTO_ADJ:	STANDARD_P11_AUTO_ADJ=(u8)value;	break;
+		case	TOL_BAND:	STANDARD_P12_TOL_BAND=(u8)value;	break;
+		case	TEST:	STANDARD_P13_TEST=0;	break;
+//P2
+		case	CURRENT:	SETPOINT_P20_Signal=1;	break;
+		case	VOLTAGE:	SETPOINT_P20_Signal=2;	break;
+		case	SWITCH:		SETPOINT_P20_Signal=3;	break;
+		case	MIN_RGE2:	break;
+		case	MAX_PRG2:	break;
+		case	CHARACT:	break;                                                                               
+		case	POSITIVE:	SETPOINT_P24_ACTION=1;	break;
+		case	REVERSE:	SETPOINT_P24_ACTION=2;	break;
+		case	SHUT_OFF:	SETPOINT_P25_SHUT_OFF=(u8)value;	break;
+		case	RAMP1:	break;
+		case	RAMP2:	break;
+//P3
+		case	MIN_RGE:	break;
+		case	MAX_RGE:	break;
+		case	ZERO_POS1:	break;
+		case	ZERO_POS2:	break;
+//P4
+		case	TIME_OUT4:	break;
+		case	POS_SW1:	break;
+		case	POS_SW2:	break;
+		case	SW1_ACTV:	break;
+		case	SW2_ACTV:	break;
+//P5
+		case	LEACKAGE:	break;
+		case	SP_RGE:	break;
+		case	SENS_RGE:	break;
+		case	CTRLER:	break;
+		case	TIME_OUT5:	break;
+		case	STRK_CTR:	break;
+		case	TRAVEL:	break;
+//P6
+		case	MIN_VR:	break;
+		case	MAX_VR:	break;
+		case	ACTAUTOR1:	MAN_ADJ_P62_ACTAUTOR=1;	break;
+		case	ACTAUTOR2:	MAN_ADJ_P62_ACTAUTOR=2;	break;
+		case	SPRNG_Y2:	break;
+		case	ADJ_MODE:	break;
+//P7
+		case	KP1:	break;
+		case	KP2:	break;
+		case	TV1:	break;
+		case	TV2:	break;
+//P8
+		case	MIN_RGE8:	break;
+		case	MAX_RGE8:	break;
+		case	ACTION1:	ANLG_OUT_P82_ACTION=1;	break;
+		case	ACTION2:	ANLG_OUT_P82_ACTION=2;	break;
+		default:	break;
+	}
+	
+	
+	
 }
 /**
-*设定信号最大最小值，单位mA，每次设定最小变量为0.1mA
-*@parameter	[MIN_RGE],设定给定信号的最小值(预设为4mA)
-*@parameter	[MAX_PRG],设定给定信号的最大值(预设为20mA)
+*二次确定界面,防止误触
+*@Text	[] ,上级菜单文本
+*@parameter [] ,动作参数,全局变量
+*{ParameterAssignment(parameter,value)},更改全局参数 
 */
-void P2_SETPOINT_SignalSetting(u8 parameter)
+void CancelOROK(const char *Text, u16 parameter)
 {
-	u16 value=0;
 	u8 key=0;
-	if(parameter==MIN_RGE)	value=SETPOINT_P21_MIN_RGE*10;//将设定给定信号的最小值赋值给	parameter		(预设为4mA)
-	else	value=SETPOINT_P22_MAX_PRG*10;//将设定给定信号的最大值赋值给	parameter		(预设为20mA)
+	u16 value=0;
 	clear_screen();//清屏
+	display_GB2312_string(0,1,(u8*)Text);
+	display_GB2312_string(2,25,"Cancel      ");
+	display_GB2312_string(4,25,"Confirm     ");
+	display_GB2312_string(2,1,"■");//	□	■
+	display_GB2312_string(4,1,"□");
 	while(1)
 	{
 		key=KEY_Scan(0);//扫描按建
 		switch(key)
 		{
 			case	UP_PRES:
-						if(value<SETPOINT_P22_MAX_PRG*10)	value++;
-						else	value=value;
-						display_graphic_32x16(6,42,Triangle_Decrease_Black);
+						display_GB2312_string(2,1,"■");
+						display_GB2312_string(4,1,"□");
+						value=CLOSE;
 						break;
 			case	DOWN_PRES:
-						if(value>SETPOINT_P21_MIN_RGE*10)	value--;
-						else value=value;
-						display_graphic_32x16(6,60,Triangle_Increase_Black);
+						display_GB2312_string(2,1,"□");
+						display_GB2312_string(4,1,"■");
+						value=START;
 						break;
 			case	OK_PRES:
-						if(parameter==MIN_RGE)	{
-							SETPOINT_P21_MIN_RGE=value;//将设定给定信号的最小值赋值给	parameter		(预设为4mA)
-							SETPOINT_P21_MIN_RGE=SETPOINT_P21_MIN_RGE/10;
+						if(value==START)	ParameterAssignment(parameter,value);	
+						SET_Sign=1;
+						SET_LongPress=750;
+						MenuOption();
+						break;
+			case	SET_PRES:
+						SET_Sign=1;
+						SET_LongPress=750;
+						MenuOption();
+						break;
+			default:
+						break;
+		}
+	}
+}
+/**
+*设定信号最大最小值，单位mA，每次设定最小变量为0.1mA
+*@Text	[],显示本级菜单文本,在最顶行显示
+*@parameter	[MIN_RGE],设定给定信号的最小值(预设为4mA)
+*@parameter	[MAX_PRG],设定给定信号的最大值(预设为20mA)
+*/
+void CurrentValue(const char *Text,u16 parameter)
+{
+	u16 value=0;
+	u8 key=0;
+	switch(parameter)
+	{
+		case	MIN_RGE2:
+					value=SETPOINT_P21_MIN_RGE*10;//将设定给定信号的最小值赋值给	parameter		(预设为4mA)
+					break;
+		case	MAX_PRG2:
+					value=SETPOINT_P22_MAX_PRG*10;//将设定给定信号的最大值赋值给	parameter		(预设为20mA)
+					break;
+		case	MIN_RGE8:
+					value=ANLGOUT_P80_MIN_RGE*10;//将阀位起始点电流值赋值给	parameter		（默认为4mA)
+					break;
+		case	MAX_RGE8:
+					value=ANLGOUT_P81_MAX_RGE*10;//将100%阀位电流值赋值给	parameter		（默认为20mA)
+					break;
+		default:
+					break;
+	}
+	clear_screen();//清屏
+	display_GB2312_string(0,1,(u8*)Text);
+	display_string_5x7(6,110,"mA");
+	while(1)
+	{
+		key=KEY_Scan(3);//扫描按建
+		switch(key)
+		{
+			case	UP_PRES:
+						switch(parameter)
+						{
+							case	MIN_RGE2:
+										if(value>=SETPOINT_P22_MAX_PRG*10)	value=value;
+										else	value++;
+										break;
+							case	MAX_PRG2:
+										if(value>=25*10)	value=value;
+										else	value++;
+										break;
+							case	MIN_RGE8:
+										if(value>=ANLGOUT_P81_MAX_RGE*10)	value=value;
+										else	value++;
+										break;
+							case	MAX_RGE8:
+										if(value>=25*10)	value=value;
+										else	value++;
+										break;
+							default:
+										break;
 						}
-						else	{
-							SETPOINT_P22_MAX_PRG=value;//将设定给定信号的最大值赋值给	parameter		(预设为20mA)
-							SETPOINT_P22_MAX_PRG=SETPOINT_P22_MAX_PRG/10;
+						break;
+			case	DOWN_PRES:
+						switch(parameter)
+						{
+							case	MIN_RGE2:
+										if(value<=2*10)	value=value;
+										else	value--;
+										break;
+							case	MAX_PRG2:
+										if(value<=SETPOINT_P21_MIN_RGE*10)	value=value;
+										else	value--;
+										break;
+							case	MIN_RGE8:
+										if(value<=2*10)	value=value;
+										else	value--;
+										break;
+							case	MAX_RGE8:
+										if(value<=ANLGOUT_P80_MIN_RGE*10)	value=value;
+										else	value--;
+										break;
+							default:
+										break;
 						}
+						break;
+			case	OK_PRES:
+						switch(parameter)
+						{
+							case	MIN_RGE2:
+										SETPOINT_P21_MIN_RGE=value;//将设定给定信号的最小值赋值给	parameter		(预设为4mA)
+										SETPOINT_P21_MIN_RGE=SETPOINT_P21_MIN_RGE/10;
+										break;
+							case	MAX_PRG2:
+										SETPOINT_P22_MAX_PRG=value;//将设定给定信号的最大值赋值给	parameter		(预设为20mA)
+										SETPOINT_P22_MAX_PRG=SETPOINT_P22_MAX_PRG/10;
+										break;
+							case	MIN_RGE8:
+										ANLGOUT_P80_MIN_RGE=value;
+										ANLGOUT_P80_MIN_RGE=ANLGOUT_P80_MIN_RGE/10;//
+										break;
+							case	MAX_RGE8:
+										ANLGOUT_P81_MAX_RGE=value;
+										ANLGOUT_P81_MAX_RGE=ANLGOUT_P81_MAX_RGE/10;//
+										break;
+							default:
+										break;
+						}
+						SET_Sign=1;
+						SET_LongPress=750;
+						MenuOption();
 						break;
 			case	SET_PRES:
 						SET_LongPress=750;
@@ -333,15 +567,15 @@ void P2_SETPOINT_SignalSetting(u8 parameter)
 			default:
 				break;
 		}
-		display_graphic_32x16(6,42,Triangle_Decrease_White);
-		display_graphic_32x16(6,60,Triangle_Increase_White);
+		key=0;
 		Decoding_16x32(value);
-		display_string_5x7(6,110,"mA");
-		
+		if(ExitTimed==(600-1))	Initial();//回到初始页面
 	}
 }
 
-
+/**
+*绘制菜单文本项
+*/
 void DispCurrentMenu(void)//绘制当前菜单项
 {
 	
@@ -362,8 +596,6 @@ void DispCurrentMenu(void)//绘制当前菜单项
 			item_index = menu_num-1;
 		}
 	}
-	printf("item_index:%d\r\n",item_index);
-//	printf("上级菜单:%s\r\n",prev_item[item_index].label);
 	clear_screen();//清屏
 	display_GB2312_string(0,1,(u8*)cur_item[0].title);
 	if(item_index>=MENU_MAX_ROW)
@@ -384,8 +616,9 @@ void DispCurrentMenu(void)//绘制当前菜单项
 		display_GB2312_string((item_index+1)*2,1,"■");
 	}
 }
-
-
+/**
+*选择菜单,进入各级菜单选项
+*/
 u8 MenuOption(void)
 {
 	u8 key=0;
@@ -403,11 +636,11 @@ u8 MenuOption(void)
 					switch(key)
 					{
 						case	UP_PRES:
-									item_index++; 
+									item_index--; 
 									DispCurrentMenu();
 									break;
 						case	DOWN_PRES:
-									item_index--; 
+									item_index++; 
 									DispCurrentMenu();
 									break;
 						case	OK_PRES:
@@ -429,7 +662,7 @@ u8 MenuOption(void)
 											if(cur_item[item_index].Fun != NULL)
 											{ 
 												//调用相应的动作函数,并传递参数
-												cur_item[item_index].Fun((const char *)cur_item[item_index].label);
+												cur_item[item_index].Fun((const char *)cur_item[item_index].label,cur_item[item_index].action);
 											}
 											else
 											{
@@ -463,11 +696,15 @@ u8 MenuOption(void)
 		else	Initial();//回到初始页面
 	}
 }
+/**
+*动态显示界面
+*/
 void Initial(void)
 {
 //	u8 i=0;
 	clear_screen();//清屏
 	display_128x64(UI_1);
+	printf("SETPOINT_P20_Signal:%d\r\n",SETPOINT_P20_Signal);
 	while(1)
 	{
 		
@@ -476,9 +713,11 @@ void Initial(void)
 		Decoding_12x16(ExitTimed);
 	}
 }
+/**
+*开机LOGO界面
+*/
 void LOGODisplay(void)
 {
-		
 		display_128x64(LOGO);
 		delay_ms(1000);
 		Initial();
