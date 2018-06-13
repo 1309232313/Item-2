@@ -37,3 +37,6 @@
 ..\obj\main.o: ..\HARDWARE\TIMER3\timer3.h
 ..\obj\main.o: ..\SYSTEM\usart\usart.h
 ..\obj\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\main.o: ..\HARDWARE\DMA\dma.h
+..\obj\main.o: ..\HARDWARE\ADC\adc.h
+..\obj\main.o: ..\HARDWARE\TIMER4\timer4.h

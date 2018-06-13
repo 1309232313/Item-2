@@ -6,20 +6,25 @@
 #include "menu.h"
 #include "timer3.h"
 #include "usart.h"
-
+#include "dma.h"
+#include "adc.h"
+#include "timer4.h"
 void Rcc_FRE72_init(void);
 void rcc_hsi_init(void);
 void mco_init(void);
 
 int main(void)
 {	
-//	u16 i=0;
+	u16 i=0;
 	rcc_hsi_init();
 	delay_init();//延时初始化
 	uart_init(9600);	 //串口初始化为115200
 	KEY_Init();//按键初始化
 	TIM3_Int_Init(10-1,640-1);//定时器初始化,1/[64M/(640*10)]=0.0001s => 0.1ms
 	initial_lcd();//LCD初始化
+	DMA_Config();  
+	Adc_Init();		  		//ADC初始化
+	TIM4_Time_Init();
 	clear_screen();//清屏
 	
 //	display_GB2312_string(0,0,"菜单:");
@@ -36,7 +41,6 @@ int main(void)
 //		display_graphic_12x16(6,30,Triangle_Increase_Black);
 //		display_graphic_12x16(6,50,Triangle_Decrease_White);
 //		display_graphic_12x16(6,70,Triangle_Decrease_Black);
-		
 		LOGODisplay();
 	}
 }

@@ -147,7 +147,7 @@
             <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>6</TargetSelection>
+          <TargetSelection>11</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -161,7 +161,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver>Segger\JL2CM3.dll</Driver>
+            <Driver>STLink\ST-LINKIII-KEIL_SWO.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -365,7 +365,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\USER;..\CORE;..\STM32F10x_FWLib\inc;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HARDWARE\KEY;..\HARDWARE\LCD;..\HARDWARE\MENU;..\HARDWARE\TIMER3;..\HARDWARE\ZK</IncludePath>
+              <IncludePath>..\USER;..\CORE;..\STM32F10x_FWLib\inc;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HARDWARE\KEY;..\HARDWARE\LCD;..\HARDWARE\MENU;..\HARDWARE\TIMER3;..\HARDWARE\ZK;..\HARDWARE\Action;..\HARDWARE\ADC;..\HARDWARE\DMA;..\HARDWARE\TIMER4;..\HARDWARE\Digital</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -452,6 +452,31 @@
               <FileName>zk.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\ZK\zk.c</FilePath>
+            </File>
+            <File>
+              <FileName>action.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\Action\action.c</FilePath>
+            </File>
+            <File>
+              <FileName>adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\ADC\adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\DMA\dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\TIMER4\timer4.c</FilePath>
+            </File>
+            <File>
+              <FileName>digital.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\Digital\digital.c</FilePath>
             </File>
           </Files>
         </Group>

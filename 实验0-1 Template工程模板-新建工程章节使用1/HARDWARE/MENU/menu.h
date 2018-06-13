@@ -76,6 +76,66 @@
 extern u8 item_index;//当前菜单项索引
 
 
+/**************************************************************************************************
+*参数存储变量,全局变量
+*/
+//P1
+extern u8	STANDARD_P10_ACTUATOR;	//Form1=1,Form2=2,Form3=3
+extern u8	STANDARD_P11_AUTO_ADJ;	//启动自动整定程序
+extern u8	STANDARD_P12_TOL_BAND;	//设定偏差带或死区
+extern u8	STANDARD_P13_TEST;	//试验修改结果
+//p2
+extern u8	SETPOINT_P20_Signal;	//SETPOINT_P20_Signal=1.电流, 2.电压, 3.开关量
+extern float SETPOINT_P21_MIN_RG;//全局变量,设定给定信号的最小值(预设为4mA)
+extern float SETPOINT_P22_MAX_PRG;//全局变量,设定给定信号的最大值(预设为20mA)
+extern u8	SETPOINT_P23_CHARACT;	//选择调节特性曲线
+extern u8	SETPOINT_P24_ACTION;	//1,正向;2,反向;设定阀门正反作用方式
+extern u8	SETPOINT_P25_SHUT_OFF;	//设定阀门开度阈值
+extern u8	SETPOINT_P26_RAMP1;	//降低开向速度
+extern u8	SETPOINT_P27_RAMP2;	//降低关向速度
+//P3
+extern u8	ACTUATOR_P30_MIN_RGE;	//调节曲线起始开度(预设为0%)
+extern u8	ACTUATOR_P31_MAX_RGE;	//调节曲线终止开度(预设为100%)
+extern u8	ACTUATOR_P32_ZERO_POS; //1,正向;2,逆向;起始点方向设置(预设为全关即返馈杆逆时针方向)
+//P4
+extern u8	MESSAGES_P40_TIME_OUT; //定位超时
+extern u8	MESSAGES_P41_POS_SW1; //第一位置信号设置点
+extern u8	MESSAGES_P42_POS_SW2; //第二位置信号设置点
+extern u8	MESSAGES_P43_SW1_ACTV; //高于或低于第一位置信号时有效
+extern u8	MESSAGES_P44_SW2_ACTV; //高于或低于第二位置信号时有效
+//P5
+extern u8	ALARMS_P50_LEACKAGE; //启动执行器气缸泄漏报警
+extern u8	ALARMS_P51_SP_RGE; //启动给定信号超限报警
+extern u8	ALARMS_P52_SENS_RGE; //启动零点漂移报警
+extern u8	ALARMS_P53_CTRLER; //启动远方控制被切换报警
+extern u8	ALARMS_P54_TIME_OUT; //启动定位超时报警
+extern u8	ALARMS_P55_STRK_CTR; //启动调节行程超限报警
+extern u8	ALARMS_P56_TRAVEL; //启动总行程超限报警
+//P6
+extern float	MAN_ADJ_P60_MIN_VR; //手动设置阀门全关位置
+extern float	MAN_ADJ_P61_MAX_VR; //手动设置阀门全开位置
+extern u8	MAN_ADJ_P62_ACTAUTOR; //选择执行器型式
+extern u8	MAN_ADJ_P63_SPRNG_Y2; //1,正向;2,反向;设定执行器弹簧伸长时定位器返馈杆旋转方向
+extern u8	MAN_ADJ_P64_ADJ_MODE; //选择自动调整所需检测的项目
+//P7
+extern u8	CTRL_PAR_P70_KP1; //开向比例系数调整
+extern u8	CTRL_PAR_P71_KP2; //关向比例系数调整
+extern u8	CTRL_PAR_P72_TV1; //开向积分时间调整
+extern u8	CTRL_PAR_P73_TV2; //关向积分时间调整
+//P8
+extern float	ANLGOUT_P80_MIN_RGE;//阀位起始点电流值（默认为4mA)
+extern float	ANLGOUT_P81_MAX_RGE;//100%阀位电流值（默认为20mA)
+extern u8	ANLG_OUT_P82_ACTION; //1,正向;2,反向;阀位正反方向选择（默认4mA 对应阀位 0%）
+extern u8 Level;
+
+extern vu16 AD_Value[];//用来存放ADC转换结果，也是DMA的目标地址
+
+
+
+
+
+
+
 
 
 
@@ -112,7 +172,7 @@ void DispCurrentMenu(void);//绘制当前菜单项
 void CancelOROK(const char *Text, u16 parameter);//动作
 void CurrentValue(const char *Text,u16 parameter);
 void	ParameterAssignment(u16 parameter,u16 value);
-
+void ValvePosition_P6(const char *Text,u16 parameter);//阀门位置
 u8 MenuOption(void);
 void Initial(void);
 void LOGODisplay(void);

@@ -42,8 +42,8 @@
 	u8	ALARMS_P55_STRK_CTR=0; //启动调节行程超限报警
 	u8	ALARMS_P56_TRAVEL=0; //启动总行程超限报警
 //P6
-	u8	MAN_ADJ_P60_MIN_VR=0; //手动设置阀门全关位置
-	u8	MAN_ADJ_P61_MAX_VR=0; //手动设置阀门全开位置
+	float	MAN_ADJ_P60_MIN_VR=100.0; //手动设置阀门全关位置
+	float	MAN_ADJ_P61_MAX_VR=100.0; //手动设置阀门全开位置
 	u8	MAN_ADJ_P62_ACTAUTOR=0; //选择执行器型式
 	u8	MAN_ADJ_P63_SPRNG_Y2=0; //1,正向;2,反向;设定执行器弹簧伸长时定位器返馈杆旋转方向
 	u8	MAN_ADJ_P64_ADJ_MODE=0; //选择自动调整所需检测的项目
@@ -229,13 +229,13 @@ struct MenuItem menu_P5_ALARMS[8] = // 第2级菜单,P5	报警功能组
 };
 struct MenuItem menu_P6_MAN_ADJ[6] = // 第2级菜单,P6	手动调整
 {
-//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作			动作参数			下一级菜单						上一级菜单
-			{6,				5, 			0,					"6.MAN_ADJ     >>",		"1.MIN_VR     ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,								menu_main},//不确定 子 级菜单是什么
-			{6,				5, 			1,					"",										"2.MAX_VR     ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,								menu_main},//不确定 子 级菜单是什么
-			{6,				5, 			2,					"",										"3.ACTAUTOR   ",	MENU_SUBMENU, NULL, 			NULL,  		menu_P6_2ACTAUTOR,	menu_main},//不确定 子 级菜单是什么
-			{6,				5, 			3,					"",										"4.SPRNG_Y2   ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,								menu_main},//不确定 子 级菜单是什么
-			{6,				5, 			4,					"",										"5.ADJ_MODE   ",	MENU_SUBMENU, NULL, 			NULL,  		NULL,								menu_main},//不确定 子 级菜单是什么
-			{6,				5, 			5,					"",										"6.EXIT       ",	MENU_PARAM, 	UpOneLevel,	NULL,			NULL,								menu_main},//不确定 子 级菜单是什么
+//本级菜单数量	上级菜单级	当前菜单级  级菜单标题							菜单文本						参考宏定义	 		动作							动作参数				下一级菜单						上一级菜单
+			{6,				5, 			0,					"6.MAN_ADJ     >>",		"1.MIN_VR     ",	MENU_PARAM, 	ValvePosition_P6, 	MIN_VR,  		NULL,								menu_main},//不确定 子 级菜单是什么
+			{6,				5, 			1,					"",										"2.MAX_VR     ",	MENU_PARAM, 	ValvePosition_P6, 	MAX_VR,  		NULL,								menu_main},//不确定 子 级菜单是什么
+			{6,				5, 			2,					"",										"3.ACTAUTOR   ",	MENU_SUBMENU, NULL, 							NULL,  			menu_P6_2ACTAUTOR,	menu_main},//不确定 子 级菜单是什么
+			{6,				5, 			3,					"",										"4.SPRNG_Y2   ",	MENU_SUBMENU, NULL, 							NULL,  			NULL,								menu_main},//不确定 子 级菜单是什么
+			{6,				5, 			4,					"",										"5.ADJ_MODE   ",	MENU_SUBMENU, NULL, 							NULL,  			NULL,								menu_main},//不确定 子 级菜单是什么
+			{6,				5, 			5,					"",										"6.EXIT       ",	MENU_PARAM, 	UpOneLevel,					NULL,				NULL,								menu_main},//不确定 子 级菜单是什么
 };
 struct MenuItem menu_P7_PAR[12] = // 第2级菜单,P7	控制参数
 {
@@ -297,7 +297,7 @@ struct MenuItem menu_P8_ANLG_OUT[6] = // 第2级菜单,P8	模拟信号输出
 				{2,				4, 			0,					"",									"2.Form 2      ",	MENU_PARAM, 	CancelOROK, 	ACTAUTOR2,	NULL,								menu_P6_MAN_ADJ},//型式2
 	};
 ////p8
-	struct MenuItem menu_P8_2ACTION[2] = // 第	3 级菜单,P6_2	选择执行器型式	
+	struct MenuItem menu_P8_2ACTION[2] = // 第	3 级菜单,P8_2	选择执行器型式	
 	{
 	//本级菜单数量	上级菜单级	当前菜单级  级菜单标题						菜单文本						参考宏定义	 		动作					动作参数			下一级菜单						上一级菜单
 				{2,				4, 			0,					"8_2.ACTION   >>",	"1.Positive    ",	MENU_PARAM, 	CancelOROK, 	ACTION1,			NULL,								menu_P8_ANLG_OUT},//正向	
@@ -376,10 +376,10 @@ void	ParameterAssignment(u16 parameter,u16 value)
 		case	SW1_ACTV:	break;
 		case	SW2_ACTV:	break;
 //P5
-		case	LEACKAGE:	break;
+		case	LEACKAGE:	break;    
 		case	SP_RGE:	break;
 		case	SENS_RGE:	break;
-		case	CTRLER:	break;
+		case	CTRLER:	break;                                       
 		case	TIME_OUT5:	break;
 		case	STRK_CTR:	break;
 		case	TRAVEL:	break;
@@ -402,9 +402,6 @@ void	ParameterAssignment(u16 parameter,u16 value)
 		case	ACTION2:	ANLG_OUT_P82_ACTION=2;	break;
 		default:	break;
 	}
-	
-	
-	
 }
 /**
 *二次确定界面,防止误触
@@ -454,6 +451,7 @@ void CancelOROK(const char *Text, u16 parameter)
 	}
 }
 /**
+*使用页面:P2.1,P2.2,P8.0,P8.1
 *设定信号最大最小值，单位mA，每次设定最小变量为0.1mA
 *@Text	[],显示本级菜单文本,在最顶行显示
 *@parameter	[MIN_RGE],设定给定信号的最小值(预设为4mA)
@@ -572,6 +570,174 @@ void CurrentValue(const char *Text,u16 parameter)
 		if(ExitTimed==(600-1))	Initial();//回到初始页面
 	}
 }
+/**
+*使用页面P6.1,P6.2
+*
+*/
+void ValvePosition_P6(const char *Text,u16 parameter)
+{
+	u16 value=0;
+	u8 key=0;
+	switch(parameter)
+	{
+		case	MIN_VR:
+					value=MAN_ADJ_P60_MIN_VR*10;//将设定给定信号的最小值赋值给	parameter		(预设为4mA)
+					break;
+		case	MAX_VR:
+					value=MAN_ADJ_P61_MAX_VR*10;//将设定给定信号的最大值赋值给	parameter		(预设为20mA)
+					break;
+		default:
+					break;
+	}
+	clear_screen();//清屏
+	display_GB2312_string(0,1,(u8*)Text);
+	display_string_5x7(6,110,"%");
+	while(1)
+	{
+		key=KEY_Scan(3);//扫描按建
+		switch(key)
+		{
+			case	UP_PRES:
+						switch(parameter)
+						{
+							case	MIN_VR:
+										if(value>=MAN_ADJ_P61_MAX_VR*10)	value=value;
+										else	value++;
+										break;
+							case	MAX_VR:
+										if(value>=100*10)	value=value;
+										else	value++;
+										break;
+							case ADJ_MODE:
+										
+										break;
+							default:
+										break;
+						}
+						break;
+			case	DOWN_PRES:
+						switch(parameter)
+						{
+							case	MIN_VR:
+										if(value<=0*10)	value=value;
+										else	value--;
+										break;
+							case	MAX_VR:
+										if(value<=MAN_ADJ_P60_MIN_VR*10)	value=value;
+										else	value--;
+										break;
+							default:
+										break;
+						}
+						break;
+			case	OK_PRES:
+						switch(parameter)
+						{
+							case	MIN_RGE2:
+										MAN_ADJ_P60_MIN_VR=value;//将设定给定信号的最小值赋值给	parameter		(预设为4mA)
+										MAN_ADJ_P60_MIN_VR=MAN_ADJ_P60_MIN_VR/10;
+										break;
+							case	MAX_PRG2:
+										MAN_ADJ_P61_MAX_VR=value;//将设定给定信号的最大值赋值给	parameter		(预设为20mA)
+										MAN_ADJ_P61_MAX_VR=MAN_ADJ_P61_MAX_VR/10;
+										break;
+							default:
+										break;
+						}
+						SET_Sign=1;
+						SET_LongPress=750;
+						MenuOption();
+						break;
+			case	SET_PRES:
+						SET_LongPress=750;
+						MenuOption();
+						break;
+			default:
+				break;
+		}
+		key=0;
+		Decoding_16x32(value);
+		if(ExitTimed==(600-1))	Initial();//回到初始页面
+	}
+}
+/// <summary>
+/// 阀门自调整程序
+/// </summary>
+void ValvePosition_P6_ADJ_MODE()
+{
+    u16 ValvePositionAcquisition = 0;//采集阀门转动角度模拟量
+    u16 delay = 100;//阀门开启延时
+    u8 i = 0;
+    u32 num = 0;//循环采集传感器数据集合
+    u16 before = 0;//动作前采集的值
+    u16 rear = 0;//动作后采集的值
+    u8 difference = 0;//前后只差,如果大于设定值则记录
+    u8 flag = 0;//零位/最大位标志
+
+    while (1)
+    {
+        if (flag == 0)
+        {
+            for (i = 0; i < 10; i++)
+            {
+                num = num + AD_Value[0];
+            }
+            before = num / 10;
+            TIM_CCxCmd(TIM4, TIM_Channel_3, TIM_CCx_Enable);
+            TIM_CCxCmd(TIM4, TIM_Channel_4, TIM_CCx_Disable);
+            TIM_SetCompare4(TIM3, 100);
+            delay_ms(delay);
+            TIM_CCxCmd(TIM4, TIM_Channel_3, TIM_CCx_Disable);
+            TIM_CCxCmd(TIM4, TIM_Channel_4, TIM_CCx_Disable);
+            for (i = 0; i < 10; i++)
+            {
+                num = num + AD_Value[0];
+            }
+            rear = num / 10;
+            difference = before - rear;
+            if (difference < 0) difference = -difference;
+            if (difference < 10)
+            {
+                flag = flag;
+            }
+            else flag = 1;
+        }
+        TIM_CCxCmd(TIM4, TIM_Channel_3, TIM_CCx_Enable);
+        TIM_CCxCmd(TIM4, TIM_Channel_4, TIM_CCx_Disable);
+        delay_ms(1000);
+        delay_ms(1000);
+        delay_ms(1000);
+
+        if (flag == 1)
+        {
+            for (i = 0; i < 10; i++)
+            {
+                num = num + AD_Value[0];
+            }
+            before = num / 10;
+            TIM_CCxCmd(TIM4, TIM_Channel_3, TIM_CCx_Disable);
+            TIM_CCxCmd(TIM4, TIM_Channel_4, TIM_CCx_Enable);
+            TIM_SetCompare4(TIM4, 100);
+            delay_ms(delay);
+            TIM_CCxCmd(TIM4, TIM_Channel_3, TIM_CCx_Disable);
+            TIM_CCxCmd(TIM4, TIM_Channel_4, TIM_CCx_Disable);
+            for (i = 0; i < 10; i++)
+            {
+                num = num + AD_Value[0];
+            }
+            rear = num / 10;
+            difference = before - rear;
+            if (difference < 0) difference = -difference;
+            if (difference < 10)
+            {
+                flag = flag;
+            }
+            else break;
+        }
+
+    }
+}
+
 
 /**
 *绘制菜单文本项
