@@ -15,7 +15,6 @@ void mco_init(void);
 
 int main(void)
 {	
-	u16 i=0;
 	rcc_hsi_init();
 	delay_init();//延时初始化
 	uart_init(9600);	 //串口初始化为115200

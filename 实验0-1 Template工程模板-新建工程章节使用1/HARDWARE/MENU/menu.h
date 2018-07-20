@@ -12,7 +12,8 @@
 
 #define	START					13 //	启动	
 #define	CLOSE					14 //	关闭
-
+//定义相应的动作关联参数
+#define ACTION_ASSOCIATION	5//动作关联参数
 //定义相应的动作参数
 //p1
 	#define	Form1				101	//P1.0定义定位器安装形式:1,Form1
@@ -140,16 +141,20 @@ extern vu16 AD_Value[];//用来存放ADC转换结果，也是DMA的目标地址
 
 
 
-typedef void (*MENU_FUN)(const char *,u16 );
+typedef void (*MENU_FUN)(const char *,u16 *);
 /*************** 
  * 菜单结构 
  * 一个数组既代表一级菜单，数组中的一个元素就是一个菜单项，就是一个单独的结构体， 
  * 数组中的第一个元素中的num值很重要，表示本级菜单具有多少个菜单项。 
  * 
  * uint8_t num 本级菜单数量，必须在第一项中设置正确的菜单项数量 
+ * u8 Higher_Menu_Level;上级菜单级
+ * u8 Current_Menu_Level;当前菜单级
  * char* label 菜单文本 
  * uint8_t type 此项类型，参考宏定义 
  * MENU_CALLBACK CallBack;  指向动作的函数指针，此项要执行的具体动作函数 
+ * u16 action 向动作函数传递的动作参数
+ * u16 ActionAssociation  动作关联，指向多级并行控制命令时只能是有一个指令时
  * mymenu* next 下一级菜单，只需在菜单的第一项设置，其他项置空（NULL）即可 
  * mymenu* prev 上一级菜单，同上 
  **************/ 
@@ -163,16 +168,18 @@ struct MenuItem//结构体类型定义//定义一个菜单
 	uint8_t type;			//参考宏定义
 	MENU_FUN Fun;	//指向动作的函数指针
 	u16 action;//向动作函数传递的动作参数
+	u16 ActionAssociation;//动作关联，指向多级并行控制命令时只能是有一个指令时
 	struct MenuItem *next;	//下一级菜单
 	struct MenuItem *prev;	//上一级菜单
 };
 
-void	UpOneLevel(const char *Text, u16 parameter);//返回上一级
+void	UpOneLevel(const char *Text, u16 *parameter);//返回上一级
 void DispCurrentMenu(void);//绘制当前菜单项
-void CancelOROK(const char *Text, u16 parameter);//动作
-void CurrentValue(const char *Text,u16 parameter);
+void Associated_Action(void);//动作关联函数,用来关闭其他启动项
+void CancelOROK(const char *Text, u16 *parameter);//动作
+void CurrentValue(const char *Text,u16 *parameter);
 void	ParameterAssignment(u16 parameter,u16 value);
-void ValvePosition_P6(const char *Text,u16 parameter);//阀门位置
+void ValvePosition_P6(const char *Text,u16 *parameter);//阀门位置
 u8 MenuOption(void);
 void Initial(void);
 void LOGODisplay(void);
